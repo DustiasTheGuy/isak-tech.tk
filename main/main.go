@@ -14,32 +14,6 @@ const (
 	PORT = 8081
 )
 
-func main() {
-	app := fiber.New()
-
-	indexGroup := app.Group("/", func(c *fiber.Ctx) error {
-		return c.Next()
-	})
-
-	protectedGroup := app.Group("/protected", func(c *fiber.Ctx) error {
-		return c.Next()
-	})
-
-	// All Routes
-	indexGroup.Get("/", index.RootController)
-	indexGroup.Get("/get-posts", index.GetPostsController)
-	indexGroup.Get("/get-post/:id", index.GetPostController)
-	indexGroup.Get("/side-menu", index.SideMenuController)
-	indexGroup.Post("/contact", index.ContactController)
-	indexGroup.Get("/meta-data", index.MetaDataController)
-
-	protectedGroup.Get("/", protected.RootController)
-	protectedGroup.Post("/add-post", protected.AddPostController)
-	protectedGroup.Post("/add-iamge", protected.AddImageController)
-
-	log.Fatal(app.Listen(fmt.Sprintf(":%d", PORT)))
-}
-
 /*
 	GET /
 	GET /get-posts
@@ -52,3 +26,33 @@ func main() {
 	POST /protected/add-post
 	POST /protected/add-image
 */
+
+func main() {
+	app := fiber.New()
+
+	// path, middleware
+	indexGroup := app.Group("/", func(c *fiber.Ctx) error {
+		return c.Next()
+	})
+
+	// path, middleware
+	protectedGroup := app.Group("/protected", func(c *fiber.Ctx) error {
+		return c.Next()
+	})
+
+	// All unprotected routes, no verification is nessecary
+	indexGroup.Get("/", index.RootController)                // currently not used
+	indexGroup.Get("/get-posts", index.GetPostsController)   // query all posts without images
+	indexGroup.Get("/get-post/:id", index.GetPostController) // query a single post with images
+	indexGroup.Get("/side-menu", index.SideMenuController)   // sidemenu controller
+	indexGroup.Post("/contact", index.ContactController)     // when someone uses the contact form
+	indexGroup.Get("/meta-data", index.MetaDataController)   // metadata for the site
+
+	// Routes that require a valid jwt header token
+	// header token should be placed in authorization:token
+	protectedGroup.Get("/", protected.RootController)
+	protectedGroup.Post("/add-post", protected.AddPostController)   // create a new post
+	protectedGroup.Post("/add-iamge", protected.AddImageController) // add a new image to a post
+
+	log.Fatal(app.Listen(fmt.Sprintf(":%d", PORT)))
+}
