@@ -11,7 +11,7 @@ import (
 // GetPostsController is used for getting all posts from the database
 func GetPostsController(c *fiber.Ctx) error {
 	db := config.DefaultConfig().ConnectMySQL() // create a new connection to mysql
-	var posts []Post                            // store the posts that will be queried
+	var posts []routes.Post                     // store the posts that will be queried
 
 	rows, err := db.Query("SELECT * FROM posts") // execute a query
 
@@ -21,7 +21,7 @@ func GetPostsController(c *fiber.Ctx) error {
 
 	// i=0; i <rows.length; i++;
 	for rows.Next() { // loop over query results
-		var post Post // storage for every single iteration
+		var post routes.Post // storage for every single iteration
 
 		if err := rows.Scan( // scan content of query results index into post variable
 			&post.ID,

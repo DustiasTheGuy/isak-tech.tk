@@ -10,8 +10,8 @@ import (
 
 // GetPostController selects one post with its primary key
 func GetPostController(c *fiber.Ctx) error {
-	var post Post                                                        // will be populated with data from mysql
-	var images []Image                                                   // will be populated with data from mysql
+	var post routes.Post                                                 // will be populated with data from mysql
+	var images []routes.Image                                            // will be populated with data from mysql
 	db := config.DefaultConfig().ConnectMySQL()                          // create a new connection to mysql
 	row := db.QueryRow("SELECT * FROM posts WHERE id=?", c.Params("id")) // select one row with primary key
 
@@ -29,7 +29,7 @@ func GetPostController(c *fiber.Ctx) error {
 	}
 	// query relevant images
 
-	images = append(images, Image{ // append post imageurl as the thumbnail
+	images = append(images, routes.Image{ // append post imageurl as the thumbnail
 		ID:        0,
 		URL:       post.ImageURL,
 		Date:      post.Date,
@@ -44,7 +44,7 @@ func GetPostController(c *fiber.Ctx) error {
 	}
 
 	for rows.Next() { // loop images and append to images slice
-		var image Image // temporary variable
+		var image routes.Image // temporary variable
 		if err := rows.Scan(
 			&image.ID,
 			&image.URL,
