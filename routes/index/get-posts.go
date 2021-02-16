@@ -3,7 +3,6 @@ package index
 import (
 	"isak-tech/config"
 	"isak-tech/routes"
-	"log"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -32,14 +31,18 @@ func GetPostsController(c *fiber.Ctx) error {
 			&post.UserID,
 			&post.Archived,
 			&post.ImageURL,
-			&post.Images); err != nil {
-			log.Fatal(err)
+			&post.TotalImages); err != nil {
+			return c.JSON(routes.HTTPResponse{
+				Message: "Internal Server Error",
+				Success: false,
+				Data:    nil,
+			})
 		}
 
 		posts = append(posts, post) // append to posts slice
 		// i++
 	}
-
+	defer db.Close()
 	return c.JSON(routes.HTTPResponse{
 		Message: "/get-posts",
 		Success: true,

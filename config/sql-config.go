@@ -3,7 +3,6 @@ package config
 import (
 	"database/sql"
 	"fmt"
-	"log"
 
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -25,7 +24,7 @@ func (c MySqlConfig) ConnectMySQL() *sql.DB {
 	db, err := sql.Open("mysql", connectionURI)
 
 	if err != nil {
-		log.Fatal(err)
+		return nil
 	}
 
 	return db

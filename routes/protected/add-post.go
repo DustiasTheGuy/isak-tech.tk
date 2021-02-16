@@ -2,13 +2,12 @@ package protected
 
 import (
 	"isak-tech/routes"
-	"log"
 
 	"github.com/gofiber/fiber/v2"
 )
 
 func AddPostController(c *fiber.Ctx) error {
-	var newPost routes.Post
+	var newPost *routes.Post
 	/*
 		Expected JSON
 
@@ -20,11 +19,19 @@ func AddPostController(c *fiber.Ctx) error {
 	*/
 
 	if err := c.BodyParser(&newPost); err != nil {
-		log.Fatal(err)
+		return c.JSON(routes.HTTPResponse{
+			Message: "Internal Server Error",
+			Success: false,
+			Data:    nil,
+		})
 	}
 
 	if err := newPost.NewPost(); err != nil {
-		log.Fatal(err)
+		return c.JSON(routes.HTTPResponse{
+			Message: "Internal Server Error",
+			Success: false,
+			Data:    nil,
+		})
 	}
 
 	return c.JSON(routes.HTTPResponse{

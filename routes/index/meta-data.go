@@ -12,5 +12,12 @@ func MetaDataController(c *fiber.Ctx) error {
 		Success: true,
 		Data:    nil,
 	})
-
 }
+
+/*
+   Articles,
+   News,
+   Product Reviews,
+   Guides,
+   Uncategorized
+*/

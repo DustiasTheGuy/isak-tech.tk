@@ -3,7 +3,6 @@ package index
 import (
 	"isak-tech/config"
 	"isak-tech/routes"
-	"log"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -24,23 +23,33 @@ func GetPostController(c *fiber.Ctx) error {
 		&post.UserID,
 		&post.Archived,
 		&post.ImageURL,
-		&post.Images); err != nil {
-		log.Fatal(err)
+		&post.TotalImages); err != nil {
+		return c.JSON(routes.HTTPResponse{
+			Message: "Internal Server Error",
+			Success: false,
+			Data:    nil,
+		})
 	}
 	// query relevant images
 
-	images = append(images, routes.Image{ // append post imageurl as the thumbnail
-		ID:        0,
-		URL:       post.ImageURL,
-		Date:      post.Date,
-		PostID:    post.ID,
-		Thumbnail: 1,
-	})
+	/*
+		images = append(images, routes.Image{ // append post imageurl as the thumbnail
+			ID:        0,
+			URL:       post.ImageURL,
+			Date:      post.Date,
+			PostID:    post.ID,
+			Thumbnail: 1,
+		})
+	*/
 
 	rows, err := db.Query("SELECT * FROM images WHERE postid=?", post.ID) // select all images with postid
 
 	if err != nil {
-		log.Fatal(err)
+		return c.JSON(routes.HTTPResponse{
+			Message: "Internal Server Error",
+			Success: false,
+			Data:    nil,
+		})
 	}
 
 	for rows.Next() { // loop images and append to images slice
@@ -51,7 +60,11 @@ func GetPostController(c *fiber.Ctx) error {
 			&image.Date,
 			&image.PostID,
 			&image.Thumbnail); err != nil {
-			log.Fatal(err)
+			return c.JSON(routes.HTTPResponse{
+				Message: "Internal Server Error",
+				Success: false,
+				Data:    nil,
+			})
 		}
 
 		images = append(images, image) // append to slice
@@ -59,6 +72,7 @@ func GetPostController(c *fiber.Ctx) error {
 
 	post.Images = images // update images to slice populated with images from mysql
 
+	defer db.Close()
 	return c.JSON(routes.HTTPResponse{
 		Message: "/get-post/:id",
 		Success: true,
