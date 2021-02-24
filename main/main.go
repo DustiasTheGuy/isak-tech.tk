@@ -6,7 +6,6 @@ import (
 	"isak-tech/routes/index"
 	"isak-tech/routes/protected"
 	"log"
-	"os"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
@@ -32,7 +31,7 @@ const (
 */
 
 var publicFolder string = "./public"
-var headerProtection string = os.Getenv("headerProtection")
+var headerProtection string = "5a02e4042cab4a50a491dbbc117a415756c8362a8014dabd5472ef77278503b9"
 
 // SET headerProtection={key}
 

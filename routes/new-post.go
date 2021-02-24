@@ -7,6 +7,7 @@ import (
 
 func (p *Post) NewPost() error {
 	db := config.DefaultConfig().ConnectMySQL() // create a new connection to mysql
+	defer db.Close()
 
 	result, err := db.Exec(
 		"INSERT INTO posts (title, post, category, imageurl, userid) VALUES (?, ?, ?, ?, ?) ",

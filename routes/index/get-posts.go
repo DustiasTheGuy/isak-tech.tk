@@ -10,7 +10,8 @@ import (
 // GetPostsController is used for getting all posts from the database
 func GetPostsController(c *fiber.Ctx) error {
 	db := config.DefaultConfig().ConnectMySQL() // create a new connection to mysql
-	var posts []routes.Post                     // store the posts that will be queried
+	defer db.Close()
+	var posts []routes.Post // store the posts that will be queried
 
 	rows, err := db.Query("SELECT * FROM posts") // execute a query
 
@@ -42,7 +43,6 @@ func GetPostsController(c *fiber.Ctx) error {
 		posts = append(posts, post) // append to posts slice
 		// i++
 	}
-	defer db.Close()
 	return c.JSON(routes.HTTPResponse{
 		Message: "/get-posts",
 		Success: true,

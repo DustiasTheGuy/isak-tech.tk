@@ -19,6 +19,7 @@ func AddImageController(c *fiber.Ctx) error {
 	var body routes.Image
 
 	db := config.DefaultConfig().ConnectMySQL()
+	defer db.Close()
 
 	if err := c.BodyParser(&body); err != nil {
 		return c.JSON(routes.HTTPResponse{

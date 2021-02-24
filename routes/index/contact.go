@@ -11,7 +11,7 @@ import (
 type Email struct {
 	ID          uint      `json:"id"`
 	Inquiry     string    `json:"inquiry"`
-	SenderName  string    `json:"name"`
+	SenderName  string    `json:"fullName"`
 	SenderEmail string    `json:"email"`
 	Message     string    `json:"message"`
 	Date        time.Time `json:"date"`
@@ -19,6 +19,7 @@ type Email struct {
 
 func ContactController(c *fiber.Ctx) error {
 	db := config.DefaultConfig().ConnectMySQL()
+	defer db.Close()
 	var body Email
 
 	if err := c.BodyParser(&body); err != nil {
@@ -29,7 +30,7 @@ func ContactController(c *fiber.Ctx) error {
 		})
 	}
 
-	if !checkField(body.Inquiry, 10) {
+	if !checkField(body.Inquiry, 4) {
 		return c.JSON(routes.HTTPResponse{
 			Message: "Missing Field Inquiry",
 			Success: false,

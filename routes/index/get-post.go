@@ -9,9 +9,10 @@ import (
 
 // GetPostController selects one post with its primary key
 func GetPostController(c *fiber.Ctx) error {
-	var post routes.Post                                                 // will be populated with data from mysql
-	var images []routes.Image                                            // will be populated with data from mysql
-	db := config.DefaultConfig().ConnectMySQL()                          // create a new connection to mysql
+	var post routes.Post                        // will be populated with data from mysql
+	var images []routes.Image                   // will be populated with data from mysql
+	db := config.DefaultConfig().ConnectMySQL() // create a new connection to mysql
+	defer db.Close()
 	row := db.QueryRow("SELECT * FROM posts WHERE id=?", c.Params("id")) // select one row with primary key
 
 	if err := row.Scan( // scan row into post variable
@@ -71,8 +72,6 @@ func GetPostController(c *fiber.Ctx) error {
 	}
 
 	post.Images = images // update images to slice populated with images from mysql
-
-	defer db.Close()
 	return c.JSON(routes.HTTPResponse{
 		Message: "/get-post/:id",
 		Success: true,

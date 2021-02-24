@@ -38,6 +38,7 @@ func SideMenuController(c *fiber.Ctx) error {
 
 func queryPostsWith(query string) []Data {
 	db := config.DefaultConfig().ConnectMySQL()
+	defer db.Close()
 	var posts []routes.Post
 	rows, err := db.Query(query)
 
@@ -64,16 +65,23 @@ func queryPostsWith(query string) []Data {
 
 		posts = append(posts, post)
 	}
-	defer db.Close()
 	return formatData(posts)
 }
 
 func formatData(p []routes.Post) []Data {
 	var data []Data
 
+	var t string
+
 	for i := 0; i < len(p); i++ {
+		if len(p[i].Title) > 20 {
+			t = p[i].Title[0:20]
+		} else {
+			t = p[i].Title
+		}
+
 		data = append(data, Data{
-			Text: p[i].Title[0:20],
+			Text: t,
 			Link: "/post",
 			ID:   p[i].ID,
 		})
