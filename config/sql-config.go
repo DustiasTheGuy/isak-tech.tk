@@ -36,7 +36,7 @@ func DefaultConfig() *MySqlConfig {
 		Host:      "localhost",
 		User:      "root",
 		Password:  "password",
-		Database:  "nodejs_portfolio",
+		Database:  "isak_tech",
 		Port:      3306,
 		Reconnect: true,
 	}
