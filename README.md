@@ -1,1 +1,1 @@
-# isak-tech.tk server rebuild
+# isak-tech.tk server
