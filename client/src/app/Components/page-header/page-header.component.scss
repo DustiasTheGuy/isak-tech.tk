@@ -1,0 +1,315 @@
+section {
+    width: 100%;
+    height: 100vh;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    position: relative;
+    background: #2b5876;  /* fallback for old browsers */  /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-gradient(linear, left top, right top, from(#a0a0a0), to(#094974));
+    background: -o-linear-gradient(left, #a0a0a0, #094974);
+    background: linear-gradient(to right, #a0a0a0, #094974); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 80%);
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 80%);
+
+
+    .content-container {
+        width: 100%;
+        height: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+        z-index: 5;
+
+        .content {
+            height: 50%;
+            width: calc(65% - 1em);
+            //background-color: gainsboro;
+            z-index: 2;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: space-evenly;
+                -ms-flex-pack: space-evenly;
+                    justify-content: space-evenly;
+            -webkit-box-align: center;
+                -ms-flex-align: center;
+                    align-items: center;
+            
+            .block.block-cta {
+                width: 100%;
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-orient: vertical;
+                -webkit-box-direction: normal;
+                    -ms-flex-direction: column;
+                        flex-direction: column;
+                -webkit-box-pack: center;
+                    -ms-flex-pack: center;
+                        justify-content: center;
+                button {
+                    border: none;
+                    padding: 1em;
+                    width: 225px;
+                    position: relative;
+                    height: 50px;
+                    background-color: rgb(32, 93, 206);
+                    text-transform: uppercase;
+                    font-size: 18px;
+                    letter-spacing: 1.2px;
+                    span {
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        -webkit-transform: translate(-50%, -50%);
+                            -ms-transform: translate(-50%, -50%);
+                                transform: translate(-50%, -50%);
+                        color: #fff;
+                    }
+                }
+
+                h1, p {
+                    color: #fff;
+                    margin: 0;
+                }
+
+                h1 {
+                    font-size: 48px;
+                }
+
+                p {
+                    margin: 25px 0;
+                    width: 68%;
+                }
+            }
+
+            .block.block-card {
+                margin-left: 10px;
+                background-color: #fff;
+                border-radius: 50px;
+                height: 300px;
+                width: 100%;
+                position: relative;
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+                        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+                -webkit-transition: all 200ms linear;
+                -o-transition: all 200ms linear;
+                transition: all 200ms linear;
+                text-align: center;
+                -webkit-box-pack: center;
+                    -ms-flex-pack: center;
+                        justify-content: center;
+                -webkit-box-orient: vertical;
+                -webkit-box-direction: normal;
+                    -ms-flex-direction: column;
+                        flex-direction: column;
+                -webkit-box-align: center;
+                    -ms-flex-align: center;
+                        align-items: center;
+                -webkit-transform: rotate(4deg);
+                    -ms-transform: rotate(4deg);
+                        transform: rotate(4deg);
+
+                .images {
+                    display: -webkit-box;
+                    display: -ms-flexbox;
+                    display: flex;
+                    -ms-flex-pack: distribute;
+                        justify-content: space-around;
+                    margin-top: 15px;
+                    width: 70%;
+
+                    img {
+                        width: 64px;
+                        width: 64px;
+                        -o-object-fit: contain;
+                           object-fit: contain;
+                        display: inline-block;
+                        
+                        &:not(:last-of-type) {
+                            margin-right: 10px;
+                        }
+                    }
+                }
+
+                h3 {
+                    font-size: 38px;
+                    max-width: 80%;
+                    margin: 0;
+                    color: rgb(66, 66, 66);
+                }
+
+                p {
+                    width: 75%;
+                }
+
+                &:hover {
+                    .card-nested {
+                        top: 98%;
+                    }
+                }
+
+                .card-nested {
+                    background-color: #fff;
+                    position: absolute;
+                    left: 50%;
+                    -webkit-transform: translateX(-50%);
+                        -ms-transform: translateX(-50%);
+                            transform: translateX(-50%);
+                    top: 50%;
+                    width: 90%;
+                    height: 100%;
+                    border-radius: 50px;
+                    -webkit-box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+                            box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+                    -webkit-transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                    -o-transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                    transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                    display: -webkit-box;
+                    display: -ms-flexbox;
+                    display: flex;
+                    -webkit-box-pack: center;
+                        -ms-flex-pack: center;
+                            justify-content: center;
+                    -webkit-box-align: center;
+                        -ms-flex-align: center;
+                            align-items: center;
+                   
+                    p {
+                        width: 50%;
+                        margin: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+@media only screen and (max-width: 1700px) and (min-width: 1300px) {
+    // 75%
+    section {
+        .content-container {
+            .content {
+                width: 75%;
+
+                .block.block-cta {
+                    p {
+                        width: 74%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1300px) and (min-width: 999px) {
+    // 83%
+    section {
+        .content-container {
+            .content {
+                width: 83%;
+                .block.block-cta {
+                    h1 {
+                        font-size: 38px;
+                    }
+
+                    p {
+                        width: 81%;
+                    }
+                }
+            }
+        }
+    }
+}
+  
+@media only screen and (max-width: 999px) and (min-width: 780px) {
+    // 89%
+    section {
+        .content-container {
+            .content {
+                width: 89%;
+                .block.block-cta {
+                    h1 {
+                        font-size: 28px;
+                    }
+
+                    p {
+                        width: 94%;
+                    }
+                }
+            }
+        }
+    }
+}
+  
+@media only screen and (max-width: 780px) {
+    // 100%
+    section {
+        .content-container {
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+                -ms-flex-direction: column;
+                    flex-direction: column;
+            -webkit-box-align: center;
+                -ms-flex-align: center;
+                    align-items: center;
+            .content {
+                width: 100%;
+                -webkit-box-orient: vertical;
+                -webkit-box-direction: normal;
+                    -ms-flex-direction: column;
+                        flex-direction: column;
+
+                .block.block-cta {
+                    -webkit-box-align: center;
+                        -ms-flex-align: center;
+                            align-items: center;
+                    text-align: center;
+
+                    &:first-child {
+                        margin-bottom: 35px;
+                    }
+
+                    h1 {
+                        font-size: 40px;
+                    }
+
+                    p {
+                        width: 75%;
+                    }
+
+                    button {
+                        width: 280px;
+                    }
+                }
+    
+                .block.block-card {
+                    width: 70%;
+                    display: none;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,33 @@
+<section *ngIf="data">
+    <app-breadcrumbs [links]="[
+    { text: 'Posts', link: '/posts' },
+    { text: data.category, link: '/posts', query: { category: data.category } },
+    { text: data.title, link: '/post', query: { id: data.id } }
+    ]"></app-breadcrumbs>
+
+    <div class="content">
+        <div class="images">
+            <img id="selectedImg" [src]="selectedImg.url" alt="Currently selected image">
+        
+        
+            <div class="images-available">
+                <img *ngFor="let img of data.images;let i = index" [src]="img.url" (click)="selectedImg = img" alt="A beautiful image">
+            </div>
+        </div>
+
+        <div class="meta-information">
+            <small>{{data.category}}</small>
+            <small>{{data.date | date: 'medium'}}</small>
+            <small *ngIf="data.archived === 1">Archived</small>
+        </div>
+        
+        <div class="body">
+            <h2>{{data.title}}</h2>
+            <div [innerHTML]="data.post">
+
+            </div>
+        </div>
+    </div>
+</section>
+
+

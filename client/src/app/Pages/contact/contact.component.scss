@@ -1,0 +1,183 @@
+section {
+  padding: 2em 1em;
+  overflow-x: hidden;
+  position: relative;
+
+  form {
+    margin: 0 0 2em 0;
+    display: block;
+    width: 680px;
+    z-index: 4;
+    position: relative;
+
+    &::before {
+      content: 'Contact Me';
+      position: absolute;
+      left: calc(100% + 98px);
+      top: 25px;
+      -webkit-transform-origin: top left;
+          -ms-transform-origin: top left;
+              transform-origin: top left;
+      -webkit-transform: rotate(90deg);
+          -ms-transform: rotate(90deg);
+              transform: rotate(90deg);
+      text-transform: uppercase;
+      white-space: nowrap;
+      font-size: 64px;
+      color: rgb(216, 216, 216);
+    }
+
+    .row {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      margin: 20px 0;
+      .form-group {
+        margin: 0;
+      }
+      .form-group:not(:last-of-type) {
+        margin-right: 1.4em;
+      }
+    }
+
+    .form-group {
+      margin: 20px 0;
+      width: 100%;
+
+      &:focus-within {
+        label {
+          color: #1384b1;
+        }
+      }
+
+      label, input, textarea, select {
+        display: block;
+        width: 100%;
+        font-size: 17px;
+      }
+
+      label {
+        margin: 5px 0;
+        color: rgb(70, 70, 70);
+      }
+
+      input, textarea, select {
+        padding: .5em;
+        border: 1px solid rgb(175, 175, 175);
+        outline: none;
+        -webkit-transition: all 200ms linear;
+        -o-transition: all 200ms linear;
+        transition: all 200ms linear;
+        background-color: #fff;
+        color: #333;
+
+      }
+
+      textarea {
+        min-height: 160px;
+        resize: vertical;
+      }
+    }
+
+    .button-group {
+     display: -webkit-box;
+     display: -ms-flexbox;
+     display: flex;
+     -webkit-box-pack: end;
+         -ms-flex-pack: end;
+             justify-content: flex-end;
+      button {
+        border: 1px solid rgb(255, 255, 255);
+        background-color: #1585cf;
+        border: none;
+        padding: .7em;
+        width: 125px;
+        cursor: pointer;
+        -webkit-transition: all 200ms linear;
+        -o-transition: all 200ms linear;
+        transition: all 200ms linear;
+        text-transform: uppercase;
+        outline: none;
+        position: relative;
+        height: 40px;
+        -webkit-box-shadow: 
+        0 3px 1px -2px rgb(0 0 0 / 20%), 
+        0 2px 2px 0 rgb(0 0 0 / 14%), 
+        0 1px 5px 0 rgb(0 0 0 / 12%);
+                box-shadow: 
+        0 3px 1px -2px rgb(0 0 0 / 20%), 
+        0 2px 2px 0 rgb(0 0 0 / 14%), 
+        0 1px 5px 0 rgb(0 0 0 / 12%);
+
+        span {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          -webkit-transform: translate(-50%, -50%);
+              -ms-transform: translate(-50%, -50%);
+                  transform: translate(-50%, -50%);
+          -webkit-transition: all 200ms linear;
+          -o-transition: all 200ms linear;
+          transition: all 200ms linear;
+          font-size: 18px;
+          color: #fff;
+        }
+
+        &::before {
+          content: '';
+          width: 0;
+          height: 100%;
+          overflow: hidden;
+          background-color: #28a7da;
+          position: absolute;
+          left: 0;
+          top: 0;
+          -webkit-transition: all 200ms linear;
+          -o-transition: all 200ms linear;
+          transition: all 200ms linear;
+
+        }
+
+        &:focus {
+          -webkit-transform: scale(1.1);
+              -ms-transform: scale(1.1);
+                  transform: scale(1.1);
+          background-color: #28a7da;
+          
+          span {
+            color: #fff;
+          }
+        }
+
+        &:hover {
+          &::before {
+            width: 100%;
+          }
+
+          span {
+            color: #fff;
+          }
+        }
+      }    
+    }
+  }
+
+  #gmaps {
+    background-color: rgb(243, 243, 243);
+  }
+}
+
+@media only screen and (max-width: 780px) {
+  section {
+    padding: 1em;
+    form {
+      width: 100%;
+
+      .button-group {
+        button {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

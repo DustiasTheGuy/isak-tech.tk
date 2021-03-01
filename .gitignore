@@ -1,1 +1,6 @@
 /add_data/submit/node_modules
+/server/add_data
+/server/config
+/client/node_modules
+/client/bin
+/client/dist

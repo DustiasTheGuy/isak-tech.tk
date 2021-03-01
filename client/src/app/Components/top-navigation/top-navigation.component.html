@@ -1,0 +1,25 @@
+<nav id="navbar" class="bg-primary" [ngClass]="{ 'isTop': isTop }">
+    <div class="content">
+        <img src="/assets/logo-nav.png" routerLink="/" alt="Page Logo">
+
+
+        <div id="menu-links">
+            <a routerLink="/services" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}">Services</a>
+            <a id="onlyDesktop" routerLink="/posts" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}">Posts</a>
+
+            <div class="dropdown" (mouseenter)="menuIsOpen = true" (mouseleave)="menuIsOpen = false">
+
+                <a (click)="menuIsOpen = !menuIsOpen ? true : false" class="open-menu">
+                    More <i class="fas fa-caret-down"></i>
+                </a>
+    
+                <div [ngClass]="{ 'isOpen': menuIsOpen }">
+                    <a routerLink="/about" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}">About</a>
+                    <a routerLink="/contact" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}">Contact</a>
+                    <a routerLink="/projects" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}">Projects</a>
+                    <a routerLink="/posts" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}" id="onlyMobile">Posts</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>

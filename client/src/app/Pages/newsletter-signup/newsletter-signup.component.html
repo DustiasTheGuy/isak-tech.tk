@@ -1,0 +1,25 @@
+<section>
+    <div>
+        <h1>
+            <span>Great to hear from you!</span> 
+            <span class="contrast"> {{formConfig.fullName}}</span>
+
+            <br>
+            <span>Would You Like To Sign Up For My News Letter?</span>
+        </h1>
+        <form>
+            <div class="form-group">
+                <input (keyup.enter)="submit()" [(ngModel)]="formConfig.email" type="email" name="email" placeholder="@" autofocus>
+                <button (click)="submit()" type="button">Sign Up</button>
+            </div>
+        </form>
+
+        <a href="https://github.com/DustiasTheGuy">Check Me Out On Github</a>
+
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minima, dolor! Esse iure assumenda illo dolorem, repudiandae possimus rerum dolorum iusto vero harum, laborum obcaecati, quaerat amet? Eos minima provident possimus sapiente labore dolore pariatur illo!</p>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatum earum magni, iusto eligendi veritatis aliquid nam quis dicta voluptatibus praesentium voluptatem, voluptates nulla fugiat quos velit inventore nemo ratione dolorem repellendus quibusdam maxime expedita ut! Asperiores neque rerum blanditiis laboriosam veniam.</p>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ex, placeat perferendis distinctio quis sint rem, est dolores sunt atque quaerat quia!</p>
+
+    
+    </div>
+</section>

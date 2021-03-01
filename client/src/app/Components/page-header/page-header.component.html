@@ -1,0 +1,28 @@
+<section [ngStyle]="{ 'height': !pageHeaderState ? '100vh' : '40vh' }" id="page-header" (click)="this.playing = this.playing === true ? false : true">
+    <!-- <img *ngFor="let img of bgImages" [src]="img.url" [ngClass]="{ 'active': img.active }" alt="Large Image"> -->
+
+
+
+    <div class="content-container" *ngIf="!pageHeaderState">
+        <div class="content">
+            <div class="block block-cta">
+                <h1>Reliable Software Development</h1>
+                <p>According to the SBA, of the 30 million businesses in the U.S., only 64% of small businesses have a website. Are you one of those? Then you should hire me!</p>
+                <button class="slide slide-both" routerLink="/services">
+                    <span>Hire Me!</span>
+                </button>
+            </div>
+            <div class="block block-card">
+                <h3>Full Stack Web Developer</h3>
+                <div class="images">
+                    <img src="/assets/icons/node.png" alt="JavaScript Logo">
+                    <img src="/assets/icons/ts.png" alt="TypeScript Logo">
+                    <img src="/assets/icons/go.png" alt="Go Logo">
+                </div>
+                <div class="card-nested">
+                    <p>Programming today is a race between software engineers striving to build bigger and better idiot-proof programs, and the Universe trying to produce bigger and better idiots. So far, the Universe is winning.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

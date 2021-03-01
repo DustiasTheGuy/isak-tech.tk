@@ -1,0 +1,25 @@
+<aside *ngIf="!loading">
+    <a id="openMenu" (click)="menuOpen = !menuOpen ? true : false">
+        <div [ngClass]="{ 'open': menuOpen }">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </a>
+
+    <div class="content" [ngClass]="{ 'open': menuOpen }">
+        <div *ngFor="let group of groups" [ngStyle]="{ 'display': group.data.length > 0 ? 'flex' : 'none' }">
+            <h4>{{group.title}}</h4>
+            <a *ngFor="let item of group.data" [routerLink]="item.link" [queryParams]="{ 'id': item.id }">{{item.text}}</a>
+        </div>
+
+        <div>
+            <h4>Categories</h4>
+            <a routerLink="/posts" [queryParams]="{ 'category': 'Articles' }">Articles</a>
+            <a routerLink="/posts" [queryParams]="{ 'category': 'News' }">News</a>
+            <a routerLink="/posts" [queryParams]="{ 'category': 'Product Reviews' }">Product Reviews</a>
+            <a routerLink="/posts" [queryParams]="{ 'category': 'Guides' }">Guides</a>
+            <a routerLink="/posts" [queryParams]="{ 'category': 'Uncategorized' }">Uncategorized</a>
+        </div>
+    </div>
+</aside> 

@@ -1,0 +1,11 @@
+
+<div class="breadcrumbs">
+    <div id="links">
+        <a *ngFor="let link of links; let i = index" [routerLink]="link.link" [queryParams]="link.query">
+            <span>{{link.text}}</span>
+            <i class="fas fa-chevron-right" [ngStyle]="{ 'display': i != links.length-1 ? 'inline-block' : 'none' }"></i>
+        </a> 
+    </div>    
+
+    <app-side-menu></app-side-menu>
+</div>

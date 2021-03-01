@@ -1,0 +1,117 @@
+section {
+    padding: 3em 1em;
+    position: relative;
+    overflow-x: hidden;
+
+    &::before {
+        content: '';
+        background-image: url("/assets/icons/letter.svg");
+        background-repeat: no-repeat;
+        background-position: 100%;
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        -webkit-transform: rotate(25deg);
+            -ms-transform: rotate(25deg);
+                transform: rotate(25deg);
+        right: 0;
+        opacity: 0.4;
+    }
+    
+    h1 {
+        font-size: 39px;
+        color:rgb(37, 37, 37);
+        margin: 0;
+
+        span {  
+            text-transform: capitalize;
+            margin: 5px 0;
+
+            &:last-child {
+                font-size: 29px;
+            }
+        }
+    }
+
+    
+    form {
+        margin: 20px 0;
+    
+        .form-group {
+            position: relative;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            input {
+                width: 100%;
+                padding: 1em;
+                border: 1px solid lightgray;
+                outline: none;
+                font-size: 20px;
+                border-radius: 8px;
+                &:focus {
+                    border-color: lightskyblue;
+                }
+            }
+
+            button {
+                margin-left: 10px;
+                border: none;
+                border-radius: 8px;
+                text-transform: uppercase;
+                background-color: rgb(19, 132, 177);
+                color: #fff;
+                letter-spacing: 2px;
+                width: 130px;
+
+                &:hover {
+                    background-color: rgb(33, 149, 196);
+                }
+            }
+        }
+    }
+}
+
+
+
+
+@media only screen and (max-width: 999px) and (min-width: 780px) {
+    section {
+        h1 {
+            font-size: 28px;
+
+            span {
+                font-size: inherit;
+
+                &:last-child {
+                    font-size: 15px;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 780px) {
+    section {
+        h1 {
+            font-size: 18px;
+
+            span {
+                font-size: inherit;
+
+                &:last-child {
+                    font-size: 15px;
+                }
+            }
+        }
+
+        form {
+            .form-group {
+                input {
+                    font-size: 17px;
+                    padding: .77em;
+                }
+            }
+        }
+    }
+}

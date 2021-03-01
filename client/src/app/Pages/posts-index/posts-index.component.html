@@ -1,0 +1,19 @@
+<section *ngIf="render">
+    <app-breadcrumbs [links]="[
+    { text: 'Posts', link: '/posts' },
+    { text: pageTitle, link: '/posts', query: { category: pageTitle } }
+    ]"></app-breadcrumbs>
+
+    <div class="images">
+        <img 
+        class="post" 
+        *ngFor="let item of data" 
+        routerLink="/post" 
+        [queryParams]="{ 'id': item.id }"
+        [src]="item.imageurl" alt="">
+    </div>
+</section>
+
+<section *ngIf="!render">
+    <h1>Loading Posts...</h1>
+</section>
