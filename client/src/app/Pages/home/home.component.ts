@@ -18,10 +18,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.titleService.setTitle('Isak Tech - Home')
+    this.titleService.setTitle('Isak Tech - Web Developer')
     AOS.init();
-  }
-
-  test() {
   }
 }
