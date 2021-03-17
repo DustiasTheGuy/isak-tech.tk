@@ -1,6 +1,7 @@
 package index
 
 import (
+	"fmt"
 	"isak-tech/config"
 	"isak-tech/routes"
 
@@ -9,6 +10,7 @@ import (
 
 // GetPostController selects one post with its primary key
 func GetPostController(c *fiber.Ctx) error {
+	var imageID int64
 	var post routes.Post                        // will be populated with data from mysql
 	var images []routes.Image                   // will be populated with data from mysql
 	db := config.DefaultConfig().ConnectMySQL() // create a new connection to mysql
@@ -23,29 +25,20 @@ func GetPostController(c *fiber.Ctx) error {
 		&post.Date,
 		&post.UserID,
 		&post.Archived,
-		&post.ImageURL,
+		&imageID,
 		&post.TotalImages); err != nil {
+		fmt.Println(err)
 		return c.JSON(routes.HTTPResponse{
 			Message: "Internal Server Error",
 			Success: false,
 			Data:    nil,
 		})
 	}
-	// query relevant images
 
-	/*
-		images = append(images, routes.Image{ // append post imageurl as the thumbnail
-			ID:        0,
-			URL:       post.ImageURL,
-			Date:      post.Date,
-			PostID:    post.ID,
-			Thumbnail: 1,
-		})
-	*/
-
-	rows, err := db.Query("SELECT * FROM images WHERE postid=?", post.ID) // select all images with postid
+	rows, err := db.Query("SELECT * FROM images WHERE post_id=?", post.ID) // select all images with postid
 
 	if err != nil {
+		fmt.Println(err)
 		return c.JSON(routes.HTTPResponse{
 			Message: "Internal Server Error",
 			Success: false,
@@ -61,6 +54,7 @@ func GetPostController(c *fiber.Ctx) error {
 			&image.Date,
 			&image.PostID,
 			&image.Thumbnail); err != nil {
+			fmt.Println(err)
 			return c.JSON(routes.HTTPResponse{
 				Message: "Internal Server Error",
 				Success: false,
@@ -72,6 +66,14 @@ func GetPostController(c *fiber.Ctx) error {
 	}
 
 	post.Images = images // update images to slice populated with images from mysql
+	img, err := GetImageByID(imageID)
+
+	if err != nil {
+		post.Thumbnail = "https://i.ibb.co/3d3gpFW/example-featured.png"
+	} else {
+		post.Thumbnail = img.URL
+	}
+
 	return c.JSON(routes.HTTPResponse{
 		Message: "/get-post/:id",
 		Success: true,

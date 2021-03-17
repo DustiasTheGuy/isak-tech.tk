@@ -8,7 +8,7 @@ export interface iPost {
     date: Date;
     archived: number;
     images: iObjectImage[];
-    totalImages: number;
-    imageurl: string;
-    userid: number;
+    total_images: number;
+    thumbnail: string;
+    user_id: number;
 }

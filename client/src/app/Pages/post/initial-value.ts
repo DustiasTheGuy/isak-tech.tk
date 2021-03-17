@@ -4,9 +4,9 @@ import { iPost } from '../../Interfaces/post.interface';
 export const initialValueImg: iObjectImage = {
     date: new Date(),
     id: 0,
-    postid: 0,
+    post_id: 0,
     thumbnail: 1, // is the image a thumbnail? 0/1
-    url: 'https://via.placeholder.com/1000x700'
+    url: 'https://i.ibb.co/3d3gpFW/example-featured.png'
 }
   
 export const initialValuePost: iPost = {
@@ -17,7 +17,7 @@ export const initialValuePost: iPost = {
     date: new Date(),
     archived: 0,
     images: [],
-    imageurl: 'https://via.placeholder.com/1000x700',
-    userid: 1,
-    totalImages: 0
+    thumbnail: 'https://i.ibb.co/3d3gpFW/example-featured.png',
+    user_id: 1,
+    total_images: 0
 }

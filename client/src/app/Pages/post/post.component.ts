@@ -36,10 +36,6 @@ export class PostComponent implements OnInit, OnDestroy {
     window.scrollTo({ top: 0, left: 0 });
     this.activatedRoute.queryParams
     .subscribe(params => this.getPost(params.id))
-
-    setTimeout(() => {
-        console.log(this.data);
-    }, 3000);
   }
 
   ngOnDestroy(): void {
@@ -48,9 +44,11 @@ export class PostComponent implements OnInit, OnDestroy {
 
   getPost(id: number): void {
     this.httpService.getPost(id)
-    .subscribe((response: iHttpResponse) => 
-    this.data = response.success ? response.data : null,
-    (err) => console.log(err),
-    () => this.selectedImg.url = this.data.images != null ? this.data.images[0].url : this.data.imageurl );
+    .subscribe((response: iHttpResponse) => {
+      this.data = response.success ? response.data : null;
+      this.selectedImg.url = response.data.thumbnail;
+      this.data.images.push({ date: new Date(), id: 0, post_id: 0, thumbnail: 1, url: response.data.thumbnail })
+    });
+
   }
 }

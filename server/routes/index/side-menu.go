@@ -8,7 +8,7 @@ import (
 )
 
 type Data struct {
-	ID   uint   `json:"id"`
+	ID   int64  `json:"id"`
 	Text string `json:"text"`
 	Link string `json:"link"`
 }
@@ -57,9 +57,8 @@ func queryPostsWith(query string) []Data {
 			&post.Date,
 			&post.UserID,
 			&post.Archived,
-			&post.ImageURL,
+			&post.Thumbnail,
 			&post.TotalImages); err != nil {
-
 			return nil
 		}
 
@@ -70,7 +69,6 @@ func queryPostsWith(query string) []Data {
 
 func formatData(p []routes.Post) []Data {
 	var data []Data
-
 	var t string
 
 	for i := 0; i < len(p); i++ {

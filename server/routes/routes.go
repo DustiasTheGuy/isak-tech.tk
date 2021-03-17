@@ -9,22 +9,22 @@ type HTTPResponse struct {
 }
 
 type Post struct {
-	ID          uint      `json:"id"`
+	ID          int64     `json:"id"`
 	Post        string    `json:"post"`
 	Title       string    `json:"title"`
 	Category    string    `json:"category"`
 	Date        time.Time `json:"date"`
-	UserID      uint      `json:"userid"`
+	UserID      int64     `json:"user_id"`
 	Archived    int8      `json:"archived"`
-	ImageURL    string    `json:"imageurl"`
-	TotalImages uint      `json:"totalImages"`
+	Thumbnail   string    `json:"thumbnail"`
+	TotalImages int64     `json:"total_images"`
 	Images      []Image   `json:"images"`
 }
 
 type Image struct {
-	ID        uint      `json:"id"`
+	ID        int64     `json:"id"`
 	URL       string    `json:"url"`
 	Date      time.Time `json:"date"`
-	PostID    uint      `json:"postid"`
+	PostID    int64     `json:"post_id"`
 	Thumbnail int8      `json:"thumbnail"`
 }

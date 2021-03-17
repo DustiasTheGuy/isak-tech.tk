@@ -9,6 +9,7 @@ import (
 
 // GetPostsController is used for getting all posts from the database
 func GetPostsController(c *fiber.Ctx) error {
+	var imageID int64
 	db := config.DefaultConfig().ConnectMySQL() // create a new connection to mysql
 	defer db.Close()
 	var posts []routes.Post // store the posts that will be queried
@@ -31,13 +32,21 @@ func GetPostsController(c *fiber.Ctx) error {
 			&post.Date,
 			&post.UserID,
 			&post.Archived,
-			&post.ImageURL,
+			&imageID,
 			&post.TotalImages); err != nil {
 			return c.JSON(routes.HTTPResponse{
 				Message: "Internal Server Error",
 				Success: false,
 				Data:    nil,
 			})
+		}
+
+		img, err := GetImageByID(imageID)
+
+		if err != nil {
+			post.Thumbnail = "https://i.ibb.co/3d3gpFW/example-featured.png"
+		} else {
+			post.Thumbnail = img.URL
 		}
 
 		posts = append(posts, post) // append to posts slice

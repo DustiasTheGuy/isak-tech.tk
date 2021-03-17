@@ -10,8 +10,8 @@ func (p *Post) NewPost() error {
 	defer db.Close()
 
 	result, err := db.Exec(
-		"INSERT INTO posts (title, post, category, imageurl, userid) VALUES (?, ?, ?, ?, ?) ",
-		p.Title, p.Post, p.Category, p.ImageURL, p.UserID,
+		"INSERT INTO posts (title, post, category, thumbnail, userid) VALUES (?, ?, ?, ?, ?) ",
+		p.Title, p.Post, p.Category, p.Thumbnail, p.UserID,
 	)
 
 	if err != nil {
