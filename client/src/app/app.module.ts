@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
-
+import { WindowRef } from './Services/state/window';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './Pages/home/home.component';
 import { AboutComponent } from './Pages/about/about.component';
@@ -46,7 +46,7 @@ import { PageNotFoundComponent } from './Pages/page-not-found/page-not-found.com
     HttpClientModule,
     FormsModule,
   ],
-  providers: [],
+  providers: [ WindowRef ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
