@@ -1,20 +1,7 @@
-/*
-* Prefixed by https://autoprefixer.github.io
-* PostCSS: v7.0.29,
-* Autoprefixer: v9.7.6
-* Browsers: last 4 version
-*/
-
-/*
-* Prefixed by https://autoprefixer.github.io
-* PostCSS: v7.0.29,
-* Autoprefixer: v9.7.6
-* Browsers: last 4 version
-*/
-
 footer {
-    background-color: #333;
-
+    background-color: #fff;
+    border-top: 1px solid lightgray;
+    
     .content {
         margin: 0 auto;
         width: 65%;
@@ -58,14 +45,14 @@ footer {
                         display: block;
                         margin: 0 0 10px 0;
                         text-transform: uppercase;
-                        color: rgb(224, 224, 224);
+                        color: rgb(0, 0, 0);
                         letter-spacing: 1.5px;
                         font-size: 18.72px;
                     }
             
                     a {
                         display: block;
-                        color: rgb(167, 167, 167);
+                        color: rgb(15, 124, 226);
                         text-decoration: none;
                         margin: 8px 0;
                         font-size: 15px;
@@ -84,9 +71,10 @@ footer {
             }
         }
 
-        hr {
-            border-color: #6b6b6b;
-            height: 1px;
+        .hr {
+            border-bottom: 1px solid rgb(216, 216, 216);
+            margin: 10px 0;
+            display: block;
         }
 
         .second-row {
@@ -98,7 +86,7 @@ footer {
             p {
                 margin: 0;
                 display: inline-block;
-                color: rgb(167, 167, 167);
+                color: rgb(75, 75, 75);
                 font-size: 14px;
                 letter-spacing: 1.3px;
 
@@ -109,7 +97,7 @@ footer {
 
             .seperator {
                 margin: 0 25px;
-                color: rgb(167, 167, 167);
+                color: rgb(75, 75, 75);
             }
 
             .social-icons {
@@ -119,14 +107,14 @@ footer {
 
                 a {
                     display: inline-block;
-                    
+
                     &:not(:last-of-type) {
                         margin-right: 10px;
                     }
                 }
 
                 i {
-                    color: rgb(167, 167, 167);
+                    color: rgb(75, 75, 75);
                 }
             }
         }
