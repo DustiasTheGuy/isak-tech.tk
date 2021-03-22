@@ -13,14 +13,16 @@ export const data: IData[] = [
             'Website visitors only need half a second to form an opinion of the website they are visiting.' 
         ],
         images: undefined,
-        links: undefined,
+        links: [
+            { href: '/#/services', text: 'my services' }
+        ],
     },
     {
         title: undefined,
         body: undefined,
         images: [
-            'https://images.pexels.com/photos/3758105/pexels-photo-3758105.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-            'https://images.pexels.com/photos/5255251/pexels-photo-5255251.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
+            '/assets/images/pexels-energepiccom-288477.jpg',
+            '/assets/images/pexels-minervastudio-2897883.jpg'
         ],
         links: undefined
     },
@@ -40,12 +42,12 @@ export const data: IData[] = [
             'For every one second delay in site load time, conversions fall by 12% (Google, 2018)',
             '84% of website users would abandon a purchase if their data were sent over an insecure connection.', 
             '87% of the world population uses mobile devices In 2020. 51% of small business owners increased the number of online interactions they had with clients.', 
-            'The web is growing and more businesses are moving online' 
+            'The web is growing and more businesses are moving online and so should you.' 
         ],
-        images: [ 'https://images.pexels.com/photos/325229/pexels-photo-325229.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260' ],
+        images: [ '/assets/images/pexels-photo-325229.jpeg' ],
         links: [
-            { href: 'https://www.marketingdive.com/', text: 'https://www.marketingdive.com/' },
-            { href: 'https://www.oberlo.com/', text: 'https://www.oberlo.com/' },
+            { href: 'https://www.marketingdive.com/', text: 'https://www.marketingdive.com' },
+            { href: 'https://www.oberlo.com/', text: 'https://www.oberlo.com' },
             { href: '/#/services', text: 'my services' }
         ]
     },

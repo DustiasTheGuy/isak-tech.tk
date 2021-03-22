@@ -6,9 +6,15 @@
             </div>
             <div class="text-container" *ngIf="section.title != undefined || section.body != undefined">
                 <h3>{{ section.title }}</h3>
-                <p *ngFor="let p of section.body">{{ p }}</p>
+                
+                <ul>
+                    <li *ngFor="let p of section.body">{{ p }}</li>
+                </ul>
 
-                <a *ngFor="let link of section.links" [href]="link.href">{{link.text}}</a>
+                <a *ngFor="let link of section.links" [href]="link.href">
+                    <span class="vis-hid">{{link.text}}</span>
+                    <span class="vis-vis">{{link.text}}</span>
+                </a>
             </div>
         </div>
     </div>
