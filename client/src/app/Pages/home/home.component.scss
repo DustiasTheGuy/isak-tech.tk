@@ -2,17 +2,47 @@
     .content {
         margin-bottom: 2em;
 
+        .section.animate {
+            opacity: 1;
+        }
+
+        .section.zoom-in.animate {
+            transform: scale(1);
+        }
+
+        .section.zoom-in {
+            transform: scale(.7);
+        }
+
+        .section.fade-right.animate {
+            margin-left: 0;
+        }
+
+        .section.fade-right {
+            margin-left: -1000px;
+        }
+
+        .section.flip-in {
+            transform: rotateX(-90deg);
+        }
+
+        .section.flip-in.animate {
+            transform: rotateX(0);
+        }
+
         .section {
             background-color: #fff;
             display: block;
             margin: 60px 0;
             box-shadow: 0 3px 6px rgb(0 0 0 / 16%), 0 3px 6px rgb(0 0 0 / 23%);
-
+            transition: all 500ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
+            opacity: 0;
             .images-container {
                 display: flex;
                 flex-wrap: wrap;
                 img {
-                    max-height: 500px;
+                    max-height: 320px;
+                    max-width: 100%;
                     flex-grow: 1;
                 }
             }

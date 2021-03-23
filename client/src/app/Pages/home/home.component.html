@@ -1,6 +1,6 @@
 <div class="container">
     <div class="content">
-        <div *ngFor="let section of data" class="section">
+        <div *ngFor="let section of data; let i = index" class="section" [class]="section.animation">
             <div class="images-container">
                 <img *ngFor="let img of section.images" [src]="img" alt="Image">
             </div>

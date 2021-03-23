@@ -3,6 +3,8 @@ export interface IData {
     body?: string[];
     images?: string[];
     links?: any[];
+    animation: string;
+    offset: number;
 }
 
 export const data: IData[] = [
@@ -16,15 +18,19 @@ export const data: IData[] = [
         links: [
             { href: '/#/services', text: 'my services' }
         ],
+        animation: 'zoom-in',
+        offset: 0
     },
     {
         title: undefined,
         body: undefined,
         images: [
-            '/assets/images/pexels-energepiccom-288477.jpg',
-            '/assets/images/pexels-minervastudio-2897883.jpg'
+            '/assets/images/dude_with_suit.jpg',
+            '/assets/images/dude_with_tie.jpg'
         ],
-        links: undefined
+        links: undefined,
+        animation: 'zoom-in',
+        offset: 0
     },
     {
         title: 'My Preferred Development Style Is Agile',
@@ -33,7 +39,9 @@ export const data: IData[] = [
             'Instead of betting everything on a "big bang" launch, an agile team delivers work in small, but consumable, increments.' 
         ],
         images: undefined,
-        links: undefined
+        links: undefined,
+        animation: 'zoom-in',
+        offset: -50
     },
     {
         title: 'Things You Should Know',
@@ -44,11 +52,13 @@ export const data: IData[] = [
             '87% of the world population uses mobile devices In 2020. 51% of small business owners increased the number of online interactions they had with clients.', 
             'The web is growing and more businesses are moving online and so should you.' 
         ],
-        images: [ '/assets/images/pexels-photo-325229.jpeg' ],
+        images: [ '/assets/images/data_center.jpeg' ],
         links: [
             { href: 'https://www.marketingdive.com/', text: 'https://www.marketingdive.com' },
             { href: 'https://www.oberlo.com/', text: 'https://www.oberlo.com' },
             { href: '/#/services', text: 'my services' }
-        ]
+        ],
+        animation: 'zoom-in',
+        offset: 400
     },
 ]
