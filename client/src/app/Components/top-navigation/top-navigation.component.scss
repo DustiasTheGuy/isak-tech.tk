@@ -1,3 +1,19 @@
+.filler {
+    position: fixed;
+    width: calc(100vw - 300px);
+    height: 100%;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    display: none;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.filler.open {
+    display: block;
+}
+
+
 .bars.open {
     left: 220px;
 
@@ -34,7 +50,6 @@
         display: block;
         margin: 9px 0;
         background-color: rgb(39, 39, 39);
-        transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 }
 
@@ -50,7 +65,7 @@
     height: 100%;
     background-color: #fff;
     z-index: 2;
-    border-right: 1px solid #c9c9c9;
+    border-right: 1px solid #dddddd;
     padding: 8% 0;
     overflow: hidden;
     transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -60,7 +75,29 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        position: relative;
+        height: 100%;
 
+        #bottom-link {
+            position: absolute;
+            bottom: 0;
+            text-decoration: none;
+
+            i {
+                margin-left: 4px;
+            }
+        }
+
+        svg.active-link {
+            #svg_text, 
+            #svg_circle, 
+            #svg_checkmark, 
+            #svg_computer, 
+            #svg_line {
+                fill: rgb(134, 134, 134);
+            }
+        }
+        
         svg {
             width: 270px;
             outline: none;
@@ -103,17 +140,13 @@
             width: 75%;
 
             a.active-link {
-                &::after {
-                    opacity: 1;
-                    left: 75%;
-                    transform: translateY(-50%) rotate(180deg);
-                }
+                background-color: rgb(233, 233, 233);
             }
 
             a {
                 width: 100%;
                 text-align: center;
-                background-color: rgb(243, 243, 243);
+                background-color: rgb(247, 247, 247);
                 margin: 10px 0;
                 padding: 10px;
                 border-radius: 30px;
@@ -121,25 +154,10 @@
                 font-size: 14px;
                 color: #383838;
                 position: relative;
-
-                &::after {
-                    content: "\f061";
-                    font-family: 'Font Awesome\ 5 Free';    
-                    font-weight: 900; 
-                    position: absolute;
-                    left: 50%;
-                    opacity: 0;
-                    top: 50%;
-                    transform: translateY(-50%);
-                    transition: all 200ms linear;
-                }
-
+                transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                
                 &:hover {
-
-                    &::after {
-                        opacity: 1;
-                        left: 75%;
-                    }
+                    background-color: rgb(233, 233, 233);
                 }
             }
         }

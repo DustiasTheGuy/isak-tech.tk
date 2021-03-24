@@ -1,0 +1,14 @@
+.no-script-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column
+}
+
+.no-script-container img {
+  width: 248px;
+  height: 248px;
+  margin-bottom: 2em
+}
