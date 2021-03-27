@@ -1,10 +1,17 @@
 const testing = true;
 
-declare interface iSlide {
+export interface iSlide {
     url: string;
     active: boolean;
     textClass: string;
     btnClass: string;
+}
+
+export interface iSlideShow {
+  url: string;
+  active: boolean;
+  textClass: string;
+  btnClass: string;
 }
 
 let slideShowData: iSlide[] = [

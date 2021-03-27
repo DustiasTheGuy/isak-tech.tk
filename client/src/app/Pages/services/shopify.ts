@@ -37,7 +37,7 @@ export const shopifyOptions = (id: string) => {
         "contents": {
           "img": false,
           "imgWithCarousel": true,
-          "description": true
+          "description": false
         },
         "width": "100%",
         "text": {

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { StateService } from './Services/state/state.service';
 
 @Component({
   selector: 'app-root',
@@ -6,10 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 
-export class AppComponent implements OnInit {
-  constructor() {}
+export class AppComponent implements OnInit, OnDestroy {
+  public contentWidth: string = '';
+  
+  constructor(private stateService: StateService) {}
 
   ngOnInit() {
+    this.stateService.screenWidthState()
+    .subscribe(newState => this.contentWidth = newState);
+  }
 
+  ngOnDestroy() {
+    this.stateService.updateScreenWidthState('');
   }
 }

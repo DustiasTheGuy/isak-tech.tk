@@ -2,5 +2,27 @@ section {
     max-width: 100%;
     overflow: hidden;
     white-space: pre-wrap;
-    padding: 1em;
+    padding: 1.25em;
+
+    h1 {
+        font-size: 40px;
+    }
+
+    h2, h3 {
+        color: rgb(100, 100, 100);
+    }
+
+    ul {
+        li {
+            margin: 19px 0;
+
+            a {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                display: block;
+                margin: 10px 0;
+            }
+        }
+    }
 }

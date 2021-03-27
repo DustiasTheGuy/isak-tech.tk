@@ -1,18 +1,29 @@
 .breadcrumbs {
     padding: 1em 0;
+    margin-top: 40px;
 
     #links {
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
+        max-width: 80%;
         
         a {
             text-decoration: none;
             font-size: 15px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
         }
 
         i {
             margin: 0 10px;
         }
+    }
+}
+
+@media only screen and(max-width: 768px) {
+    .breadcrumbs {
+
     }
 }

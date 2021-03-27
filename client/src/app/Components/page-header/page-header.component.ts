@@ -1,14 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { StateService } from '../../Services/state/state.service';
-import { SlideShowData } from './slide-show.data';
+import { SlideShowData, iSlideShow } from './slide-show.data';
 
-declare interface iSlideShow {
-  url: string;
-  active: boolean;
-  textClass: string;
-  btnClass: string;
-}
 
 @Component({
   selector: 'app-page-header',
@@ -23,11 +17,16 @@ export class PageHeaderComponent implements OnInit {
   public playing: boolean = true;
   public slideShowSpeed: number = 2 * 1000;
   public bgImages: iSlideShow[] = SlideShowData;
-
+  public pageTitle?: string;
+  public contentWidth: string = '';
 
   constructor(private router: Router, private stateService: StateService) {
-    router.events.subscribe((value: any) => {
+    this.setPageData();
+    this.router.events.subscribe((e: any) => {
       this.toggleContent();
+
+      if(e instanceof NavigationEnd)
+      this.setPageData();
     });
   }
 
@@ -35,7 +34,8 @@ export class PageHeaderComponent implements OnInit {
     this.stateService.pageHeaderState()
     .subscribe(newState => this.pageHeaderState = newState);
 
-    this.imgSlider();
+    this.stateService.screenWidthState()
+    .subscribe(newState => this.contentWidth = newState);
   }
 
   toggleContent(): void {
@@ -46,6 +46,9 @@ export class PageHeaderComponent implements OnInit {
     }, 200)
   } 
 
+  setPageData(): void {
+    this.pageTitle = window.location.hash.replace('/', '').replace('#', '').replace('-', '').replace('?id=', ' ');
+  }
 
   imgSlider(): void {
     setInterval(() => {
@@ -71,5 +74,9 @@ export class PageHeaderComponent implements OnInit {
     });
 
     window.scrollBy(0, - 56); // 0 - navbar height
+  }
+
+  bgImageSetup() {
+    return `url(${ !this.pageHeaderState ? '/assets/full_size.svg' : '/assets/half_size.svg' })`;
   }
 }

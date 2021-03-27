@@ -5,6 +5,7 @@ export interface IData {
     links?: any[];
     animation: string;
     offset: number;
+    layout: string;
 }
 
 export const data: IData[] = [
@@ -19,18 +20,8 @@ export const data: IData[] = [
             { href: '/#/services', text: 'my services' }
         ],
         animation: 'zoom-in',
-        offset: 0
-    },
-    {
-        title: undefined,
-        body: undefined,
-        images: [
-            '/assets/images/dude_with_suit.jpg',
-            '/assets/images/dude_with_tie.jpg'
-        ],
-        links: undefined,
-        animation: 'zoom-in',
-        offset: 0
+        offset: 0,
+        layout: 'row'
     },
     {
         title: 'My Preferred Development Style Is Agile',
@@ -38,10 +29,13 @@ export const data: IData[] = [
             'Agile is an iterative approach to project management and software development that helps teams or individuals deliver value to their customers faster and with fewer headaches.',
             'Instead of betting everything on a "big bang" launch, an agile team delivers work in small, but consumable, increments.' 
         ],
-        images: undefined,
+        images: [
+            '/assets/images/data_center.jpeg',
+        ],
         links: undefined,
         animation: 'zoom-in',
-        offset: -50
+        offset: -50,
+        layout: 'row-reverse'
     },
     {
         title: 'Things You Should Know',
@@ -52,13 +46,17 @@ export const data: IData[] = [
             '87% of the world population uses mobile devices In 2020. 51% of small business owners increased the number of online interactions they had with clients.', 
             'The web is growing and more businesses are moving online and so should you.' 
         ],
-        images: [ '/assets/images/data_center.jpeg' ],
+        images: [ 
+            '/assets/images/dude_with_tie.jpg',
+            '/assets/images/dude_with_suit.jpg'
+         ],
         links: [
             { href: 'https://www.marketingdive.com/', text: 'https://www.marketingdive.com' },
             { href: 'https://www.oberlo.com/', text: 'https://www.oberlo.com' },
             { href: '/#/services', text: 'my services' }
         ],
         animation: 'zoom-in',
-        offset: 400
+        offset: 400,
+        layout: 'row'
     },
 ]

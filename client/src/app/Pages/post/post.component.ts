@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpService } from '../../Services/http/http.service';
 import { iHttpResponse } from '../../Interfaces/http.interface';
 import { iObjectImage } from '../../Interfaces/image-object.interface';
@@ -20,6 +20,7 @@ export class PostComponent implements OnInit, OnDestroy {
   public selectedImg: iObjectImage;
 
   constructor(
+    private router: Router,
     private stateService: StateService,
     private titleService: Title,
     private activatedRoute: ActivatedRoute, 
@@ -45,9 +46,15 @@ export class PostComponent implements OnInit, OnDestroy {
   getPost(id: number): void {
     this.httpService.getPost(id)
     .subscribe((response: iHttpResponse) => {
-      this.data = response.success ? response.data : null;
-      this.selectedImg.url = response.data.thumbnail;
-      this.data.images.push({ date: new Date(), id: 0, post_id: 0, thumbnail: 1, url: response.data.thumbnail })
+      if(response.success) {
+        this.data = response.data;
+        this.selectedImg.url = response.data.thumbnail;
+        this.data.images.push({ date: new Date(), id: 0, post_id: 0, thumbnail: 1, url: response.data.thumbnail })
+        return;
+      }
+
+      this.router.navigate(['/posts']);
+      return;
     });
 
   }

@@ -39,4 +39,9 @@ export class HomeComponent implements OnInit {
       }
     }
   }
+
+  isMobile(): boolean {
+    console.log(window.innerWidth >= 768)
+    return false;
+  }
 }

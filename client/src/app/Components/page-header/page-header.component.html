@@ -1,7 +1,5 @@
-<section [ngStyle]="{ 'height': !pageHeaderState ? '100vh' : '40vh' }" id="page-header" (click)="this.playing = this.playing === true ? false : true">
+<section [ngClass]="{ 'isSmall': pageHeaderState }" id="page-header" (click)="this.playing = this.playing === true ? false : true">
     <!-- <img *ngFor="let img of bgImages" [src]="img.url" [ngClass]="{ 'active': img.active }" alt="Large Image"> -->
-
-
 
     <div class="content-container" *ngIf="!pageHeaderState">
         <div class="content">
@@ -14,6 +12,12 @@
             <button class="slide slide-both" routerLink="/services">
                 <span>Hire Me!</span>
             </button>
+        </div>
+    </div>
+
+    <div class="content-container" *ngIf="pageHeaderState">
+        <div class="content" id="page-header-content" [style.width]="contentWidth">
+            <h1>{{ pageTitle }}</h1>
         </div>
     </div>
 </section>
