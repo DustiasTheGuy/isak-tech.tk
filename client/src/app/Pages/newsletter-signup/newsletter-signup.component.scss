@@ -59,13 +59,18 @@ section {
                 border: none;
                 border-radius: 8px;
                 text-transform: uppercase;
-                background-color: rgb(19, 132, 177);
                 color: #fff;
                 letter-spacing: 2px;
                 width: 130px;
+                cursor: pointer;
+                transition: all 200ms linear;
+
+                span {
+                    color: inherit;
+                }
 
                 &:hover {
-                    background-color: rgb(33, 149, 196);
+                    transform: scale(.92);
                 }
             }
         }

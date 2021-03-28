@@ -1,8 +1,24 @@
 <section>
     <div class="container">
-        <div id="product-component-6578619941061"></div>
-        <div id="product-component-6578619744453"></div>
-        <div id='product-component-6578619842757'></div>
+        <div class="product" *ngFor="let product of products; let i = index">
+            <div class="images">
+                <img [src]="product.images[product.selected]">
+                <div class="image-picker">
+                    <img 
+                    *ngFor="let img of product.images; let j = index" 
+                    [src]="img" 
+                    (click)="product.selected = j" 
+                    [ngClass]="{ 'selected': j === product.selected }">
+                </div>
+            </div>
+            
+            <div class="body">
+                <h2>{{ product.label }}</h2>
+                <p>{{ product.description }}</p>
+                <h5>{{ product.price }}SEK</h5>
+                <button [style.backgroundColor]="themeColor">Place Order</button>
+            </div>
+        </div>
     </div>
 
     <a routerLink="/contact">I have a question</a>

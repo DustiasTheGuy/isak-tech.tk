@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import * as AOS from 'aos';
 import { data, IData }  from './data';
+import { StateService } from '../../Services/state/state.service';
 
 @Component({
   selector: 'app-home',
@@ -10,18 +10,17 @@ import { data, IData }  from './data';
 
 export class HomeComponent implements OnInit {
   public data: IData[];
+  public themeColor: string = '';
 
-  constructor() {
+  constructor(private stateService: StateService) {
       this.data = data;
       window.addEventListener('scroll', () => this.elementInView());
   }
 
   ngOnInit() {
     document.title = 'Isak Tech - Web Developer'
-    AOS.init({
-      delay: 0, // values from 0 to 3000, with step 50ms
-      duration: 1000 // values from 0 to 3000, with step 50ms
-    });
+    this.stateService.themeColorState()
+    .subscribe(newColor => this.themeColor = newColor);
   }
 
   elementInView() {

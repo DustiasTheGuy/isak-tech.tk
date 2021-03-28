@@ -31,9 +31,19 @@ footer {
                 }
             }
 
-            img {
+            svg {
                 width: 300px;
                 height: 150px;
+                fill: inherit;
+
+                
+                #svg_text, #svg_circle, #svg_checkmark, #svg_computer, #svg_line {
+                    fill: inherit;
+                }
+
+                #svg_text, #svg_checkmark {
+                    filter: invert(100%);
+                }
             }
 
             .list {

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,11 +7,11 @@ import { Observable, Subject } from 'rxjs';
 
 export class StateService {  
   public pageHeaderSubject = new Subject<boolean>();
-  public screenWidthSubject = new Subject<string>();
+  public themeColorSubject = new BehaviorSubject<string>('rgb(32, 93, 206)');
 
   constructor() { }
 
-  public updatePageHeaderState(shouldBeSmall: boolean) {
+  public updatePageHeaderState(shouldBeSmall: boolean): void {
     this.pageHeaderSubject.next(shouldBeSmall);
   }
 
@@ -19,11 +19,11 @@ export class StateService {
     return this.pageHeaderSubject.asObservable();
   }
 
-  public updateScreenWidthState(screenWidth: string) {
-    this.screenWidthSubject.next(screenWidth);
+  public updateThemeColorState(newColor: string): void {
+    this.themeColorSubject.next(newColor);
   }
 
-  public screenWidthState(): Observable<string> {
-    return this.screenWidthSubject.asObservable();
+  public themeColorState(): Observable<string> {
+    return this.themeColorSubject.asObservable();
   }
 }

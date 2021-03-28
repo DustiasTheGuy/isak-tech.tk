@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { StateService } from '../../Services/state/state.service';
-import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -8,8 +7,10 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './newsletter-signup.component.html',
   styleUrls: ['./newsletter-signup.component.scss']
 })
+
 export class NewsletterSignupComponent implements OnInit, OnDestroy {
   public email: string;
+  public themeColor: string = '';
   public formConfig = {
     email: '',
     fullName: ''
@@ -17,7 +18,6 @@ export class NewsletterSignupComponent implements OnInit, OnDestroy {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private titleService: Title,
     private stateService: StateService) {
     this.email = '';
   }
@@ -28,8 +28,10 @@ export class NewsletterSignupComponent implements OnInit, OnDestroy {
       this.formConfig.fullName = params.n || '';
     });
     
-    this.titleService.setTitle('Isak Tech - News Letter');
+    document.title = 'Isak Tech - News Letter';
     this.stateService.updatePageHeaderState(true);
+    this.stateService.themeColorState()
+    .subscribe(newColor => this.themeColor = newColor);
   }
 
   ngOnDestroy(): void {

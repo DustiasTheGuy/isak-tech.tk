@@ -17,6 +17,7 @@ export class ContactComponent implements OnInit, OnDestroy {
   public formFields: iFormFields = { inquiry: '', fullName: '', email: '', message: '' }
   public messages: any = { message: 'Example Message', show: false, error: false }
   public btnDisabled: boolean = false;
+  public themeColor: string = '';
 
   constructor(
     private router: Router,
@@ -32,6 +33,8 @@ export class ContactComponent implements OnInit, OnDestroy {
     this.activatedRoute.queryParams.subscribe(params => 
     this.formFields.inquiry = this.formSetup(params.card))
     document.getElementById('fullName')?.focus();
+    this.stateService.themeColorState()
+    .subscribe(newColor => this.themeColor = newColor);
   }
 
   ngOnDestroy(): void {

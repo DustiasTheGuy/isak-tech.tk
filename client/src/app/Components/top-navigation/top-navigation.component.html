@@ -7,7 +7,7 @@
 <div class="filler" [ngClass]="{ 'open': menuIsOpen }" (click)="openMenu()"></div>
 
 <nav class="sidenav" [ngClass]="{ 'open': menuIsOpen }">
-    <div class="sidenav-content">
+    <div class="sidenav-content" [ngStyle]="{ 'fill': themeColor }">
         <svg routerLink="/" (click)="onNavigation()" xmlns="http://www.w3.org/2000/svg" width="415.999" height="160.124" viewBox="0 0 415.999 160.124">
             <g id="temp" transform="translate(-48 -175.938)">
               <path id="svg_circle"
@@ -39,7 +39,6 @@
             <a routerLink="/contact"     (click)="onNavigation()" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">Contact</a>
             <a routerLink="/news-letter" (click)="onNavigation()" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">Newsletter</a>
             <a routerLink="/privacy"     (click)="onNavigation()" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">Privacy</a>
-            
             <a href="https://github.com/dustiastheguy" id="bottom-link" target="_blank">Github <i class="fab fa-github"></i></a>
         </div>
     </div>

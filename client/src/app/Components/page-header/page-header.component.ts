@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { StateService } from '../../Services/state/state.service';
-import { SlideShowData, iSlideShow } from './slide-show.data';
-
 
 @Component({
   selector: 'app-page-header',
@@ -13,12 +11,9 @@ import { SlideShowData, iSlideShow } from './slide-show.data';
 export class PageHeaderComponent implements OnInit {
   public showContent: boolean = false;
   public pageHeaderState: boolean = false;
-  public bgImage: number = 0;
-  public playing: boolean = true;
-  public slideShowSpeed: number = 2 * 1000;
-  public bgImages: iSlideShow[] = SlideShowData;
   public pageTitle?: string;
-  public contentWidth: string = '';
+  public fillColor: string = '#205dce';
+  public colorPickerOpen: boolean = false;
 
   constructor(private router: Router, private stateService: StateService) {
     this.setPageData();
@@ -33,9 +28,10 @@ export class PageHeaderComponent implements OnInit {
   ngOnInit(): void {
     this.stateService.pageHeaderState()
     .subscribe(newState => this.pageHeaderState = newState);
+    this.stateService.updateThemeColorState(this.fillColor);
 
-    this.stateService.screenWidthState()
-    .subscribe(newState => this.contentWidth = newState);
+    setTimeout(() => 
+    this.emitColor(this.fillColor), 1000)
   }
 
   toggleContent(): void {
@@ -50,24 +46,6 @@ export class PageHeaderComponent implements OnInit {
     this.pageTitle = window.location.hash.replace('/', '').replace('#', '').replace('-', '').replace('?id=', ' ');
   }
 
-  imgSlider(): void {
-    setInterval(() => {
-      if(this.playing && !this.pageHeaderState) {
-        if(this.bgImage >= this.bgImages.length - 1) {
-          this.bgImage = 0;
-          this.bgImages[0].active = true;
-          this.bgImages[this.bgImages.length - 1].active = false;
-
-        } else {
-          this.bgImages[this.bgImage].active = false;
-          this.bgImages[this.bgImage + 1].active = true;
-          this.bgImage++;
-        }
-      }
-
-    }, this.slideShowSpeed);
-  }
-
   scrollDown(): void {
     document.getElementById('main')?.scrollIntoView({ 
       block: 'start'
@@ -78,5 +56,10 @@ export class PageHeaderComponent implements OnInit {
 
   bgImageSetup() {
     return `url(${ !this.pageHeaderState ? '/assets/full_size.svg' : '/assets/half_size.svg' })`;
+  }
+
+  emitColor(color: string) {
+    this.fillColor = color;
+    this.stateService.updateThemeColorState(color);
   }
 }

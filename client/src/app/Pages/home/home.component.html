@@ -9,9 +9,16 @@
                 
                 <p *ngFor="let p of section.body">{{ p }}</p>
 
-                <a *ngFor="let link of section.links" [href]="link.href">
-                    <span class="vis-hid">{{ link.text }}</span>
-                    <span class="vis-vis">{{ link.text }}</span>
+                <a 
+                *ngFor="let link of section.links"
+                [href]="link.href"
+                
+                [style.--bgcolor]="themeColor"
+                [ngStyle]="{ 
+                    'border-color': themeColor,
+                    'color': themeColor
+                }">
+                    {{ link.text }}
                 </a>
             </div>
         </div>

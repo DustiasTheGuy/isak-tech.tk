@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { StateService } from '../../Services/state/state.service';
 
 @Component({
   selector: 'app-top-navigation',
@@ -10,19 +10,16 @@ import { NavigationEnd, Router } from '@angular/router';
 export class TopNavigationComponent implements OnInit {
   public menuIsOpen: boolean = false;
   public hamburgerColor: string = '#fff';
+  public themeColor: string = '';
 
-  constructor(private router: Router) {
-    // this.router.events.subscribe(e => {
-    //   if(e instanceof NavigationEnd)
-    //   this.menuIsOpen = false;
-    //   return;
-    // });
-
+  constructor(private stateService: StateService) {
     window.addEventListener('scroll', (e) => this.initColor());
   }
 
   ngOnInit(): void {
     this.initColor();
+    this.stateService.themeColorState()
+    .subscribe(newColor => this.themeColor = newColor);
   }
 
   initColor(): void {

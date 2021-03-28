@@ -69,8 +69,7 @@
 
                 a {
                     display: inline-block;
-                    color: rgb(131, 131, 131);
-                    border: 1px solid rgb(8, 77, 141);
+                    border: 1px solid;
                     padding: 10px 20px;
                     text-decoration: none;
                     margin-top: 20px;
@@ -78,46 +77,11 @@
                     white-space: nowrap;
                     min-width: 180px;
                     transition: all 400ms ease;
-
-                    .vis-hid {
-                        visibility: hidden;
-                        color: inherit;
-                    }
-
-                    .vis-vis {
-                        position: absolute;
-                        top: 50%;
-                        left: 50%;
-                        transform: translate(-50%, -50%);
-                        z-index: 5;
-                        color: inherit;
-                        transition: inherit;
-                        transition-timing-function: linear;
-                    }
-
-                    &::before, &::after {
-                        content: '';
-                        position: absolute;
-                        top: 0;
-                        width: 0;
-                        height: 100%;
-                        background-color: rgb(8, 77, 141);
-                        transition: inherit;
-                    }
-
-                    &::before {
-                        left: 0;
-                    }
-
-                    &::after {
-                        right: 0;
-                    }
+                    text-align: center;
 
                     &:hover {
+                        background-color: var(--bgcolor);
                         color: #fff !important;
-                        &::before, &::after {
-                            width: 50%;
-                        }
                     }
 
                     &:not(:last-of-type) {

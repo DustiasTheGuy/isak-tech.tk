@@ -1,3 +1,58 @@
+.color-picker {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 7;
+    span#toggle {
+        background-color: rgb(255, 255, 255);    
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid rgb(255, 255, 255);
+        margin: 50px 50px 0 0;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 200ms linear;
+        border: 1px solid;
+        position: relative;
+
+        .colors-available {
+            display: flex;
+            position: absolute;
+            top: 100%;
+            margin: 10px 0 0 0;
+
+            #blue, #red, #gray {
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+
+                &:not(:last-of-type) {
+                    margin-right: 5px;
+                }
+            }
+
+            #blue {
+                background-color: #205dce;
+            }
+
+            #red {
+                background-color: #eb4034;
+            }
+
+            #gray {
+                background-color: #3b3b3b;
+            }
+        }
+
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+}
+
 section.isSmall {
     height: 40vh;
     background-image: none !important;
@@ -22,11 +77,29 @@ section {
     position: relative;
     -webkit-box-shadow: 0 3px 5px -1px rgb(0 0 0 / 20%), 0 6px 10px 0 rgb(0 0 0 / 14%), 0 1px 18px 0 rgb(0 0 0 / 12%);
             box-shadow: 0 3px 5px -1px rgb(0 0 0 / 20%), 0 6px 10px 0 rgb(0 0 0 / 14%), 0 1px 18px 0 rgb(0 0 0 / 12%);
-    
-    background-image: url('/assets/header/1920x1080.svg');
     background-size: cover;
-    background-color: #205DCE;
     
+    svg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: inherit;
+        fill: inherit;
+
+        g {
+            fill: inherit;
+
+            #svg_bg {
+                fill: inherit;
+            }
+
+            // #Ellipse_1, #Rectangle_1, #Polygon_1 {
+            //     fill: inherit;
+            //     filter: invert(84%);
+            // }
+        }
+    }
+
     .content-container {
         width: 100%;
         height: 100%;
@@ -98,12 +171,9 @@ section {
 }
 
 
-
 @media only screen and (max-width: 1700px) and (min-width: 1450px) {
     // 75%
     section {
-        background-image: url('/assets/header/1600x950.svg');
-
         .content-container {
             .content {
                 width: 75%;
@@ -116,17 +186,9 @@ section {
     }
 }
 
-@media only screen and(max-width: 1450px) and (min-width: 1300px) {
-    section {
-        background-image: url('/assets/header/1450x950.svg');
-    }
-}
-
 @media only screen and (max-width: 1300px) and (min-width: 999px) {
     // 83%
     section {
-        background-image: url('/assets/header/1300x950.svg');
-
         .content-container {
             .content {
                 width: 83%;
@@ -141,12 +203,10 @@ section {
         }
     }
 }
-  
+
 @media only screen and (max-width: 999px) and (min-width: 780px) {
     // 89%
     section {
-        background-image: url('/assets/header/1000x950.svg');
-
         .content-container {
             .content {
                 width: 89%;
@@ -165,8 +225,6 @@ section {
 @media only screen and (max-width: 780px) {
     // 100%
     section {
-        background-image: url('/assets/header/780x950.svg');
-
         .content-container {
             -webkit-box-orient: vertical;
             -webkit-box-direction: normal;
@@ -219,12 +277,6 @@ section {
                 }
             }
         }
-    }
-}
-
-@media only screen and (max-width: 469px) {
-    section {
-        background-image: url('/assets/header/470x950.svg');
     }
 }
 

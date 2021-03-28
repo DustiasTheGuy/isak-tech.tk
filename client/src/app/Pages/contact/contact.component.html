@@ -29,7 +29,7 @@
         <p *ngIf="messages.show" [ngStyle]="{ 'color': messages.error ? 'red' : 'green' }">{{messages.message}}</p>
 
         <div class="button-group">
-            <button [disabled]="btnDisabled" (click)="validateForm()">
+            <button [disabled]="btnDisabled" (click)="validateForm()" [style.backgroundColor]="themeColor">
                 <span>Send</span>
             </button>
         </div>

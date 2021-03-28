@@ -84,7 +84,8 @@
             outline: none;
             cursor: pointer;
             margin-bottom: 50px;
-            
+            fill: inherit;
+
             #svg_text, 
             #svg_circle, 
             #svg_checkmark, 
@@ -103,16 +104,12 @@
                 }
             }
 
-            #svg_text {
-                fill: #333;
+            #svg_text, #svg_circle, #svg_checkmark, #svg_computer, #svg_line {
+                fill: inherit;
             }
 
-            #svg_circle, #svg_checkmark {
-                fill: #205dce;
-            }
-
-            #svg_computer, #svg_line {
-                fill: #333;
+            #svg_text, #svg_checkmark {
+                filter: invert(100%);
             }
         }
 

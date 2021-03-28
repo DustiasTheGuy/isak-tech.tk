@@ -10,7 +10,9 @@
         <form>
             <div class="form-group">
                 <input (keyup.enter)="submit()" [(ngModel)]="formConfig.email" type="email" name="email" placeholder="@" autofocus>
-                <button (click)="submit()" type="button">Sign Up</button>
+                <button (click)="submit()" type="button" [style.backgroundColor]="themeColor">
+                    <span>Sign Up</span>
+                </button>
             </div>
         </form>
 

@@ -3,13 +3,55 @@ section {
     position: relative;
 
     .container {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        .product {
+            display: flex;
+            padding: 100px 0;
+            
+            &:not(:last-of-type) {
+                border-bottom: 1px solid rgb(233, 233, 233);
+            }
 
-        div {
-            box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-            padding: 2em;
-            margin: 0 20px;
+            .images {
+                .image-picker {
+                    display: flex;
+
+                    img {       
+                        width: 70px;
+                        height: 70px;
+
+                        &:not(:last-of-type) {
+                            margin-right: 4px;
+                        }
+                    }
+
+                    img.selected {
+                        opacity: .6;
+                    }
+                }
+            }
+
+            .body {
+                padding: 0 100px;
+
+                h2 {
+                    font-size: 3rem;
+                }
+
+                button {
+                    padding: 1em;
+                    border: none;
+                    color: #fff;
+                    outline: none;
+                    cursor: pointer;
+                    min-width: 140px;
+                    margin-top: 50px;
+                    transition: all 200ms linear;
+                    
+                    &:hover {
+                        transform: scale(.9);
+                    }
+                }
+            }
         }
     }
 
@@ -22,9 +64,7 @@ section {
 
 @media only screen and(max-width: 1200px) {
     section {
-        .container {
-            grid-template-columns: 1fr 1fr;
-            
+        .container {            
             div {
                 margin: 20px;
             }
@@ -35,10 +75,22 @@ section {
 @media only screen and(max-width: 768px) {
     section {
         .container {
-            grid-template-columns: 1fr;
+            .product {
+                flex-direction: column;
 
-            div {
-                margin: 20px;
+                .images {
+                    .image-picker {
+                        margin: 0;
+                    }
+                }
+
+                .body {
+                    padding: 0;
+
+                    h2 {
+                        font-size: 2rem;
+                    }
+                }
             }
         }
     }
