@@ -10,6 +10,7 @@ import { data, IProject } from './data';
 
 export class ProjectsComponent implements OnInit, OnDestroy {
   public projects: IProject[];
+  public themeColor: string = '';
 
   constructor(private stateService: StateService) {
     this.projects = data;
@@ -18,6 +19,9 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     document.title = 'Isak Tech - Projects';
     this.stateService.updatePageHeaderState(true);
+    
+    this.stateService.themeColorState()
+    .subscribe(newColor => this.themeColor = newColor);
   }
 
   ngOnDestroy() {

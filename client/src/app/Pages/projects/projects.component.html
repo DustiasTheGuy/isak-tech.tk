@@ -1,23 +1,24 @@
 <section>
-    <div class="grid">
-        <div class="grid-item" *ngFor="let project of projects">
-            <div class="text">
-                <a [href]="project.repo">
-                    <h2>{{project.title}}</h2>   
-                </a>
-                <p>{{project.description}}</p>
+    <div class="project" *ngFor="let project of projects">
+        <div class="images">
+            <img class="selected-lg" [src]="project.images[project.selectedImg]" alt="Selected image">
+            <div class="select-image">
+                <img 
+                *ngFor="let img of project.images; let i = index" 
+                [src]="img" alt="An image" 
+                (click)="project.selectedImg = i" 
+                [ngClass]="{ 'selected': i === project.selectedImg }">
             </div>
+        </div>
+        <div class="body">
+            <a [href]="project.repo">
+                <h2>{{ project.title }}</h2>   
+            </a>
+            <p>{{ project.description }}</p>
 
-            <img [src]="project.images[project.selectedImg]" alt="">
-
-            <div class="controls">
-                <button [disabled]="project.selectedImg === 0" (click)="project.selectedImg = project.selectedImg - 1">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                <button [disabled]="project.selectedImg === project.images.length - 1" (click)="project.selectedImg = project.selectedImg + 1">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-            </div>
+            <a [href]="project.repo" class="href" [style.borderColor]="themeColor" [style.color]="themeColor" [style.--bgcolor]="themeColor">
+                View Project
+            </a>
         </div>
     </div>
 </section>

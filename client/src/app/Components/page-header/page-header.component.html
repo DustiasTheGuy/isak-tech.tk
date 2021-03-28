@@ -41,9 +41,11 @@
         <i class="fas fa-fill"></i>
 
         <div class="colors-available" *ngIf="colorPickerOpen">
-            <span id="blue" (click)="emitColor('#205dce')"></span>
-            <span id="gray" (click)="emitColor('#3b3b3b')"></span>
-            <span id="red" (click)="emitColor('#eb4034')"></span>
+            <span 
+            *ngFor="let color of colors" 
+            class="color" 
+            [ngStyle]="{ 'background-color': color, 'display': fillColor != color ? 'block' : 'none' }" 
+            (click)="emitColor(color)"></span>
         </div>
     </span>
 </div>

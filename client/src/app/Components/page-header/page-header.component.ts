@@ -14,6 +14,12 @@ export class PageHeaderComponent implements OnInit {
   public pageTitle?: string;
   public fillColor: string = '#205dce';
   public colorPickerOpen: boolean = false;
+  public colors: string[] = [ 
+    '#205dce', 
+    '#3b3b3b', 
+    '#eb4034',
+    '#32a852'
+  ];
 
   constructor(private router: Router, private stateService: StateService) {
     this.setPageData();
@@ -30,8 +36,14 @@ export class PageHeaderComponent implements OnInit {
     .subscribe(newState => this.pageHeaderState = newState);
     this.stateService.updateThemeColorState(this.fillColor);
 
+    let color = localStorage.getItem('color');
+    
+    if(color != null) {
+      this.fillColor = color;
+    } 
+    
     setTimeout(() => 
-    this.emitColor(this.fillColor), 1000)
+    this.emitColor(this.fillColor), 0)  
   }
 
   toggleContent(): void {
@@ -61,5 +73,6 @@ export class PageHeaderComponent implements OnInit {
   emitColor(color: string) {
     this.fillColor = color;
     this.stateService.updateThemeColorState(color);
+    localStorage.setItem('color', color);
   }
 }

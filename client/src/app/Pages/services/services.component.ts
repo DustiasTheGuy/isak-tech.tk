@@ -11,7 +11,10 @@ import { products, iProduct } from './products';
 export class ServicesComponent implements OnInit, OnDestroy {
   public themeColor: string = '';
   public products: iProduct[];
-
+  public modalOpen = false;
+  public modalData: any = {
+    product: undefined
+  };
   constructor(private stateService: StateService) {
     this.products = products;
   }
@@ -30,5 +33,15 @@ export class ServicesComponent implements OnInit, OnDestroy {
 
   strToInt(j: string): number {
     return parseInt(j);
+  }
+
+  openModal(product: iProduct) {
+    this.modalData.product = product;
+    this.modalOpen = true;
+  }
+
+  closeModal(e: Event) {
+    this.modalOpen = false;
+    e.stopPropagation();
   }
 }

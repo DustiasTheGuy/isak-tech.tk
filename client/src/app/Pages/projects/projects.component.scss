@@ -1,89 +1,93 @@
 section {
-    width: 100%;
+    padding: 100px 1em;
 
-    .grid {
-        width: 100%;
-        padding: 2em 0;
+    .project {
+        display: flex;
+        padding: 100px 0;
+        
+        &:not(:last-of-type) {
+            border-bottom: 1px solid rgb(228, 228, 228);
+        }
+        
+        .images {
+            max-width: 600px;
 
-        .grid-item {
-            position: relative;
-            text-align: center;
-            margin: 100px 0;
-            
-            img {
-                width: 100%;
+            .selected-lg {
+                width: 600px;
                 height: 400px;
-                background-color: rgb(243, 243, 243);
-                -o-object-fit: contain;
-                   object-fit: contain;
-                padding: 1em;
             }
 
-            .text {
-                padding-bottom: 2em;
-
-                a {
-                    display: block;
-                    margin: 0 auto;
-                }
-                
-                p {
-                    width: 60%;
-                    margin: 0 auto;
-                }
-            }
-
-            .controls {
-                display: -webkit-box;
-                display: -ms-flexbox;
+            .select-image {
                 display: flex;
-                -webkit-box-pack: justify;
-                    -ms-flex-pack: justify;
-                        justify-content: space-between;
-                position: absolute;
-                height: 400px;
-                width: 100%;
-                bottom: 6px;
+                flex-wrap: wrap;
+                margin-top: 5px;
 
-                button {
-                    border: none;
-                    padding: 1em;
-                    outline: none;
-                    width: 100%;
-                    background-color: rgba(41, 41, 41, 0);
-                    -webkit-transition: all 200ms linear;
-                    -o-transition: all 200ms linear;
-                    transition: all 200ms linear;
+                img {
+                    width: 60px;
+                    height: 40px;
                     cursor: pointer;
                     
-                    i {
-                        opacity: 0;
-                        -webkit-transition: all 200ms linear;
-                        -o-transition: all 200ms linear;
-                        transition: all 200ms linear;
-                        color: #ffffff;
+                    &:not(:last-of-type) {
+                        margin-right: 5px;
                     }
+                }
 
-                    &:hover {
-                        background-color: rgba(41, 41, 41, 0.158);
-                        
-                        i {
-                            opacity: 1;
-                        }
-                    }
+                img.selected {
+                    opacity: .5;
+                }
+            }
+        }
+
+        .body {
+            padding: 0 2em;
+
+            a {
+                text-decoration: none;
+                h2 {
+                    margin: 0;
+                    font-size: 3rem;
+                }
+            }
+
+            .href {
+                border: 1px solid #333;
+                padding: 6px 18px;
+                margin-top: 20px;
+                display: block;
+                width: 160px;
+                text-align: center;
+                transition: all 200ms linear;
+
+                &:hover {
+                    background-color: var(--bgcolor);
+                    color: #fff !important;
                 }
             }
         }
     }
 }
 
-@media only screen and(max-width: 768px) {
+@media only screen and(max-width: 1100px) {
     section {    
-        .grid {
-            .grid-item {
-                .text { 
-                    p {
-                        width: 80%;
+        .project {
+            flex-direction: column;
+
+            .images {
+                margin: 0 auto;
+
+                .selected-lg {
+                    width: 100%;
+                }
+            }
+
+            .body {
+                margin: 0 auto;
+                max-width: 600px;
+                padding: 2em 1em;
+
+                a {
+                    h2 {
+                        font-size: 2rem;
                     }
                 }
             }
