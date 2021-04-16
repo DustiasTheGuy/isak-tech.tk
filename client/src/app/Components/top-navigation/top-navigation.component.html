@@ -31,7 +31,7 @@
         </svg>  
 
 
-        <div class="links">
+        <div class="links" [style.--bordercoloractive]="themeColor">
             <a routerLink="/about"       (click)="onNavigation()" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">About</a>
             <a routerLink="/services"    (click)="onNavigation()" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">Services</a>
             <a routerLink="/posts"       (click)="onNavigation()" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">Posts</a>
@@ -39,7 +39,7 @@
             <a routerLink="/contact"     (click)="onNavigation()" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">Contact</a>
             <a routerLink="/news-letter" (click)="onNavigation()" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">Newsletter</a>
             <a routerLink="/privacy"     (click)="onNavigation()" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">Privacy</a>
-            <a href="https://github.com/dustiastheguy" id="bottom-link" target="_blank">Github <i class="fab fa-github"></i></a>
+            <a [style.backgroundColor]="themeColor" href="https://github.com/dustiastheguy" id="bottom-link" target="_blank">Github <i class="fab fa-github"></i></a>
         </div>
     </div>
 </nav>

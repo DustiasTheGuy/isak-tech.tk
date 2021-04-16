@@ -2,9 +2,7 @@ package main
 
 import (
 	"fmt"
-	"isak-tech/routes"
 	"isak-tech/routes/index"
-	"isak-tech/routes/protected"
 	"log"
 
 	"github.com/gofiber/fiber/v2"
@@ -43,45 +41,18 @@ func main() {
 	app.Use(cors.New())
 	// path, middleware
 	indexGroup := app.Group("/", func(c *fiber.Ctx) error {
-		// if c.Get("authorization") != headerProtection {
-		// 	return c.JSON(routes.HTTPResponse{
-		// 		Message: "Invalid Auth Token",
-		// 		Success: false,
-		// 		Data:    nil,
-		// 	})
-		// }
-
 		return c.Next()
 	})
 
-	// path, middleware
-	protectedGroup := app.Group("/protected", func(c *fiber.Ctx) error {
-		if c.Get("authorization") != headerProtection {
-			return c.JSON(routes.HTTPResponse{
-				Message: "Invalid Auth Token",
-				Success: false,
-				Data:    nil,
-			})
-		}
-
-		return c.Next()
-	})
-
-	// All unprotected routes, no verification is nessecary
 	// indexGroup.Get("/", templateSender)                   // send index.html ✅
 	indexGroup.Get("/get-posts", index.GetPostsController)   // query all posts without images ✅
 	indexGroup.Get("/get-post/:id", index.GetPostController) // query a single post with images ✅
 	indexGroup.Get("/side-menu", index.SideMenuController)   // sidemenu controller ✅
 	indexGroup.Post("/contact", index.ContactController)     // when someone uses the contact form ✅
 	indexGroup.Get("/meta-data", index.MetaDataController)   // metadata for the site ✅
-
-	// Routes that require a valid jwt header token
-	// header token should be placed in authorization:token
-	protectedGroup.Post("/add-post", protected.AddPostController)   // create a new post ✅
-	protectedGroup.Post("/add-image", protected.AddImageController) // add a new image to a post ✅
+	indexGroup.Post("/place-order", index.OrderPostController)
 
 	app.Get("**", templateSender)
-
 	log.Fatal(app.Listen(fmt.Sprintf(":%d", PORT)))
 }
 

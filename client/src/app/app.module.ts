@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { WindowRef } from './Services/state/window';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './Pages/home/home.component';
@@ -45,6 +46,7 @@ import { PageNotFoundComponent } from './Pages/page-not-found/page-not-found.com
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    DragDropModule
   ],
   providers: [ WindowRef ],
   bootstrap: [AppComponent]

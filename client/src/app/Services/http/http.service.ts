@@ -40,4 +40,8 @@ export class HttpService {
   public metaData(): Observable<iHttpResponse> {
     return this.httpClient.get<iHttpResponse>(this.serverAddr + '/meta-data', this.headerTokenSetup());
   }
+
+  public placeOrder(data: any): Observable<iHttpResponse> {
+    return this.httpClient.post<iHttpResponse>(this.serverAddr + '/place-order', data);
+  }
 }  

@@ -48,8 +48,7 @@ export class PostComponent implements OnInit, OnDestroy {
     .subscribe((response: iHttpResponse) => {
       if(response.success) {
         this.data = response.data;
-        this.selectedImg.url = response.data.thumbnail;
-        this.data.images.push({ date: new Date(), id: 0, post_id: 0, thumbnail: 1, url: response.data.thumbnail })
+        this.selectedImg = this.data.images[0];
         return;
       }
 

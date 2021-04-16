@@ -16,7 +16,7 @@ type Post struct {
 	Date        time.Time `json:"date"`
 	UserID      int64     `json:"user_id"`
 	Archived    int8      `json:"archived"`
-	Thumbnail   string    `json:"thumbnail"`
+	Thumbnail   int64     `json:"thumbnail"`
 	TotalImages int64     `json:"total_images"`
 	Images      []Image   `json:"images"`
 }

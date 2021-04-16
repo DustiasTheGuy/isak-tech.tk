@@ -68,25 +68,32 @@ section {
             box-shadow: 0 3px 5px -1px rgb(0 0 0 / 20%), 0 6px 10px 0 rgb(0 0 0 / 14%), 0 1px 18px 0 rgb(0 0 0 / 12%);
     background-size: cover;
     
-    svg {
+    .ellipse,
+    .triangle,
+    .rectangle {
         position: absolute;
-        top: 0;
-        left: 0;
-        height: inherit;
-        fill: inherit;
+        z-index: 6;
+        background-color: #fff;
+        width: 100px;
+        height: 100px;
+        cursor: move;
+    }
 
-        g {
-            fill: inherit;
+    .ellipse {
+        border-radius: 50%;
+        right: 10%;
+        bottom: 18%;
+    }
 
-            #svg_bg {
-                fill: inherit;
-            }
+    .rectangle {
+        right: 15%;
+        top: 30%;
+    }
 
-            // #Ellipse_1, #Rectangle_1, #Polygon_1 {
-            //     fill: inherit;
-            //     filter: invert(84%);
-            // }
-        }
+    .triangle { 
+        right: 22%;
+        bottom: 10%;
+        clip-path: polygon(50% 0, 100% 100%, 0 100%);
     }
 
     .content-container {
@@ -214,6 +221,21 @@ section {
 @media only screen and (max-width: 780px) {
     // 100%
     section {
+
+        .ellipse,
+        .rectangle {
+            width: 44px;
+            height: 44px;
+        }
+
+        .triangle {
+            border-left: 32px solid transparent;
+            border-right: 32px solid transparent;
+            border-bottom: 42px solid rgb(255, 255, 255);
+            right: 22%;
+            bottom: 10%;
+        }
+
         .content-container {
             -webkit-box-orient: vertical;
             -webkit-box-direction: normal;

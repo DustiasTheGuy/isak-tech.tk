@@ -1,20 +1,10 @@
-<section [ngClass]="{ 'isSmall': pageHeaderState }" id="page-header" [ngStyle]="{ 'fill': fillColor, 'background-color': fillColor }">
+<section [ngClass]="{ 'isSmall': pageHeaderState }" id="page-header" [ngStyle]="{ 'background-color': fillColor }">
     <!-- <img *ngFor="let img of bgImages" [src]="img.url" [ngClass]="{ 'active': img.active }" alt="Large Image"> -->
 
-    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1920" height="1080" viewBox="0 0 1920 1080">
-        <defs>
-          <clipPath id="clip-Web_1920_1">
-            <rect width="1920" height="1080"/>
-          </clipPath>
-        </defs>
-        <g id="Web_1920_1" data-name="Web 1920 – 1" clip-path="url(#clip-Web_1920_1)">
-          <rect id="svg_bg" width="1920" height="1080" fill="red" />
-          <circle id="Ellipse_1" data-name="Ellipse 1" cx="150" cy="150" r="150" transform="translate(810 694)" fill="#fff"/>
-          <rect id="Rectangle_1" data-name="Rectangle 1" width="220" height="220" transform="translate(1143 80)" fill="#fff"/>
-          <path id="Polygon_1" data-name="Polygon 1" d="M150,0,300,300H0Z" transform="translate(1479.413 558.498) rotate(49)" fill="#fff"/>
-        </g>
-    </svg>
-      
+    <div cdkDrag cdkDragBoundary="#page-header" class="ellipse"></div>
+    <div cdkDrag cdkDragBoundary="#page-header" class="rectangle"></div>
+    <div cdkDrag cdkDragBoundary="#page-header" class="triangle"></div>
+
     <div class="content-container" *ngIf="!pageHeaderState">
         <div class="content">
             <h1>Reliable Software Development</h1>
@@ -38,7 +28,7 @@
 
 <div class="color-picker">
     <span id="toggle" (click)="colorPickerOpen = !colorPickerOpen ? true : false" [ngStyle]="{ 'border-color': fillColor }">
-        <i class="fas fa-fill"></i>
+        <i class="fas fa-fill" [style.color]="fillColor"></i>
 
         <div class="colors-available" *ngIf="colorPickerOpen">
             <span 

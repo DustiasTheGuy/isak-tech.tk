@@ -57,7 +57,7 @@ export class PostsIndexComponent implements OnInit, OnDestroy {
     article.category === category) : response.data : null, 
     (err) => console.log('An error occured'), () => this.render = true);
 
-    //setTimeout(() => console.log(this.data), 3000)
+    setTimeout(() => console.log(this.data), 3000)
   }
 
   formatDate(date: Date) {

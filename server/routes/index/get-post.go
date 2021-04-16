@@ -66,13 +66,6 @@ func GetPostController(c *fiber.Ctx) error {
 	}
 
 	post.Images = images // update images to slice populated with images from mysql
-	img, err := GetImageByID(imageID)
-
-	if err != nil {
-		post.Thumbnail = "https://i.ibb.co/3d3gpFW/example-featured.png"
-	} else {
-		post.Thumbnail = img.URL
-	}
 
 	return c.JSON(routes.HTTPResponse{
 		Message: "/get-post/:id",

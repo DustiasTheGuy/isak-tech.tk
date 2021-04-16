@@ -43,10 +43,8 @@ func GetPostsController(c *fiber.Ctx) error {
 
 		img, err := GetImageByID(imageID)
 
-		if err != nil {
-			post.Thumbnail = "https://i.ibb.co/3d3gpFW/example-featured.png"
-		} else {
-			post.Thumbnail = img.URL
+		if err == nil {
+			post.Images = append(post.Images, img)
 		}
 
 		posts = append(posts, post) // append to posts slice

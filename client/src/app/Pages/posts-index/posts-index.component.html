@@ -10,7 +10,7 @@
         *ngFor="let item of data" 
         routerLink="/post" 
         [queryParams]="{ 'id': item.id }"
-        [src]="item.thumbnail" alt="">
+        [src]="item.images[0].url" alt="">
     </div>
 </section>
 
