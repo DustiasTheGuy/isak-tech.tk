@@ -1,31 +1,12 @@
 section {
-  padding: 2em 1em;
   overflow-x: hidden;
   position: relative;
 
   form {
-    margin: 0 0 170px 0;
+    padding: 2rem 0;
     display: block;
-    width: 680px;
     z-index: 2;
     position: relative;
-
-    &::before {
-      content: 'Contact Me';
-      position: absolute;
-      left: calc(100% + 98px);
-      top: 25px;
-      -webkit-transform-origin: top left;
-          -ms-transform-origin: top left;
-              transform-origin: top left;
-      -webkit-transform: rotate(90deg);
-          -ms-transform: rotate(90deg);
-              transform: rotate(90deg);
-      text-transform: uppercase;
-      white-space: nowrap;
-      font-size: 64px;
-      color: rgb(216, 216, 216);
-    }
 
     .row {
       display: -webkit-box;
@@ -63,7 +44,7 @@ section {
 
       input, textarea, select {
         padding: .5em;
-        border: 1px solid rgb(175, 175, 175);
+        border: 1px solid rgb(226, 226, 226);
         outline: none;
         -webkit-transition: all 200ms linear;
         -o-transition: all 200ms linear;
@@ -119,6 +100,7 @@ section {
 
   #gmaps {
     background-color: rgb(243, 243, 243);
+    margin-bottom: 1rem;
   }
 }
 

@@ -1,0 +1,4 @@
+<div *ngIf="activeAlert" [class]="[ 'alert', activeAlert.type, activeAlert.visible ? 'show' : 'hide' ]">
+    <p>{{ activeAlert.message }}</p>
+    <i class="fas fa-times" (click)="hideAlert()"></i>
+</div>

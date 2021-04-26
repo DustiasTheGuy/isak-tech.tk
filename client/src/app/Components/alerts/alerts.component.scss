@@ -1,0 +1,91 @@
+.alert {
+    position: fixed;
+    width: 80%;
+    bottom: 1rem;
+    left: 10%;
+    right: 10%;
+    border: 1px solid;
+    padding: 2rem;
+    opacity: 1;
+    display: flex;
+    justify-content: space-between;
+    opacity: 0;
+    transition: all .5s linear;
+    pointer-events: none;
+    border-radius: 1rem;
+
+    p {
+        margin: 0;
+        color: inherit;
+    }
+
+    i {
+        cursor: pointer;
+    }
+}
+
+.alert.error {
+    background-color: #f5424b;
+    border-color: #eb979b;
+    color: #fff;
+}
+
+.alert.success {
+    background-color: #0cad5f;
+    border-color: #3efa9f;
+    color: #fff;
+}
+
+.alert.info {
+    background-color: #4287f5;
+    border-color: #95b8f0;
+    color: #fff;
+}
+
+.alert.warning {
+    background-color: #d0eb38;
+    border-color: #e1ee9b;
+    color: #292929;
+}
+
+.show {
+    animation-name: appear;
+    animation-timing-function: ease-in;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    pointer-events: auto;
+    opacity: 1;
+}
+
+.hide {
+    animation-name: disappear;
+    animation-timing-function: ease-out;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+}
+
+@keyframes appear {
+    70% { transform:translateY(0%); }
+    80% { transform:translateY(-15%); }
+    90% { transform:translateY(0%); }
+    95% { transform:translateY(-7%); }
+    97% { transform:translateY(0%); }
+    99% { transform:translateY(-3%); }
+    100% { transform:translateY(0); }
+}
+
+@keyframes disappear {
+    0% { transform: translateY(0); }
+    20% {
+      opacity: 1;
+      transform: translateY(-20px);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+}

@@ -1,10 +1,4 @@
-export interface iProduct {
-    label: string;
-    price: number;
-    selected: number;
-    description: string;
-    images: string[];
-} 
+import { iProduct } from 'src/app/Interfaces/all.interfaces';
 
 export const products: iProduct[] = [
     {

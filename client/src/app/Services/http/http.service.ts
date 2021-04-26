@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { iHttpResponse } from '../../Interfaces/http.interface';
 import { iFormFields } from '../../Interfaces/form-fields.interface';
 import { Observable } from 'rxjs';
+import { InitialValues } from 'src/app/initial-values';
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +12,10 @@ import { Observable } from 'rxjs';
 export class HttpService {
   private production: boolean = true;
   private serverAddr: string;
-  private headerToken: string = '5a02e4042cab4a50a491dbbc117a415756c8362a8014dabd5472ef77278503b9';
+  private headerToken: string = InitialValues.headerTokenInitial;
 
   constructor(private httpClient: HttpClient) {
-    this.serverAddr = this.production ? 'https://www.isak-tech.tk' : 'http://localhost:8081';
+    this.serverAddr = this.production ? 'https://www.isakgranqvist.com' : 'http://localhost:8081';
   }
 
   private headerTokenSetup() {

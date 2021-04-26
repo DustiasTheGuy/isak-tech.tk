@@ -1,5 +1,5 @@
-<section>
-    <div class="container">
+<section class="container">
+    <div class="wrapper">
         <div class="product" *ngFor="let product of products; let i = index">
             <div class="images">
                 <img [src]="product.images[product.selected]">
@@ -39,8 +39,6 @@
                     <img *ngFor="let img of modalData.product.images" [src]="img">
                 </div>
                 
-                <p [ngClass]="{ 'alert': true, 'show': alert.show }" [class]="alert.class">{{ alert.message }}</p>
-
                 <div class="modal-actions">
                     <form>
                         <input type="email" name="email" placeholder="Email" [(ngModel)]="email" (keyup.enter)="submit()">

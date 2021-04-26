@@ -1,28 +1,22 @@
-<section [ngClass]="{ 'isSmall': pageHeaderState }" id="page-header" [ngStyle]="{ 'background-color': fillColor }">
-    <!-- <img *ngFor="let img of bgImages" [src]="img.url" [ngClass]="{ 'active': img.active }" alt="Large Image"> -->
-
-    <div cdkDrag cdkDragBoundary="#page-header" class="ellipse"></div>
-    <div cdkDrag cdkDragBoundary="#page-header" class="rectangle"></div>
-    <div cdkDrag cdkDragBoundary="#page-header" class="triangle"></div>
-
-    <div class="content-container" *ngIf="!pageHeaderState">
-        <div class="content">
-            <h1>Reliable Software Development</h1>
-            <p>
-                According to the SBA, 
-                only 64% of small businesses have a website. 
-                Are you one of those? Then you should hire me!
-            </p>
-            <button class="slide slide-both" routerLink="/services">
-                <span>Hire Me!</span>
-            </button>
-        </div>
+<section [ngStyle]="setupTheme()" [style.--themecolor]="fillColor"> 
+    <div 
+    *ngIf="pageHeaderState.image"
+    class="bg-img"
+    [ngStyle]="{ 'background-image': 'url(' + pageHeaderState.image.src + ')' }">
     </div>
 
-    <div class="content-container" *ngIf="pageHeaderState">
-        <div class="content" id="page-header-content">
-            <h1>{{ pageTitle }}</h1>
-        </div>
+    <div class="container">
+        <h1 [style.color]="getThemeColor()">
+            <span 
+            *ngFor="let part of titleParts; let i = index" 
+            [innerHTML]="part" 
+            [style.animationDelay]="i * 50 + 'ms'">
+            </span>
+        </h1>
+        <p *ngIf="pageHeaderState.subtitle" [style.color]="getThemeColor()">{{ pageHeaderState.subtitle }}</p>
+        <a class="slide slide-both" *ngIf="pageHeaderState.button && pageHeaderState.button.show" [routerLink]="pageHeaderState.button.href" [style.color]="fillColor">
+            <span>{{ pageHeaderState.button.text }}</span>
+        </a>
     </div>
 </section>
 

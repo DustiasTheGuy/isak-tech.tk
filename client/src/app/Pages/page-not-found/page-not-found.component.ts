@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { StateService } from '../../Services/state/state.service';
+import { Component, OnInit } from '@angular/core';
+import { StateService } from 'src/app/Services/state/state.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   templateUrl: './page-not-found.component.html',
   styleUrls: ['./page-not-found.component.scss']
 })
-export class PageNotFoundComponent implements OnInit, OnDestroy {
+export class PageNotFoundComponent implements OnInit {
   public counter: number = 5;
 
   constructor(
@@ -15,7 +15,7 @@ export class PageNotFoundComponent implements OnInit, OnDestroy {
     private stateService: StateService) { }
 
   ngOnInit(): void {
-    this.stateService.updatePageHeaderState(true);
+    this.stateService.onPageLoad();
 
     setTimeout(() => {
       this.router.navigate(['/'])
@@ -24,9 +24,5 @@ export class PageNotFoundComponent implements OnInit, OnDestroy {
     setInterval(() => {
       this.counter -= 1;
     }, 1000)
-  }
-
-  ngOnDestroy(): void {
-    this.stateService.updatePageHeaderState(false);
   }
 }

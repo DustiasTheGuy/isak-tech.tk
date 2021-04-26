@@ -1,29 +1,47 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject, BehaviorSubject } from 'rxjs';
+import { iPageHeaderConfig } from 'src/app/Interfaces/header-config.interface';
+import { iAlert } from 'src/app/Interfaces/alert.interface';
+import { InitialValues } from 'src/app/initial-values';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class StateService {  
-  public pageHeaderSubject = new Subject<boolean>();
-  public themeColorSubject = new BehaviorSubject<string>('rgb(32, 93, 206)');
+  private pageHeaderSubject = new BehaviorSubject<iPageHeaderConfig>(InitialValues.pageHeaderInitial);
+  private themeColorSubject = new BehaviorSubject<string>(InitialValues.themeColorInitial);
+  private alertSubject = new Subject<iAlert>();
 
   constructor() { }
 
-  public updatePageHeaderState(shouldBeSmall: boolean): void {
-    this.pageHeaderSubject.next(shouldBeSmall);
+  public setPageHeaderState(pageHeaderConfig: iPageHeaderConfig): void {
+    this.pageHeaderSubject.next(pageHeaderConfig);
   }
 
-  public pageHeaderState(): Observable<boolean> {
+  public getPageHeaderState(): Observable<iPageHeaderConfig> {
     return this.pageHeaderSubject.asObservable();
   }
 
-  public updateThemeColorState(newColor: string): void {
+  public setThemeColorState(newColor: string): void {
     this.themeColorSubject.next(newColor);
   }
 
-  public themeColorState(): Observable<string> {
+  public getThemeColorState(): Observable<string> {
     return this.themeColorSubject.asObservable();
+  }
+  
+  public setAlertSubject(newState: iAlert): void {
+    this.alertSubject.next(newState);
+  }
+
+  public getAlertSubject(): Observable<iAlert> {
+    return this.alertSubject.asObservable();
+  }
+
+  public onPageLoad(pageHeaderConfig?: iPageHeaderConfig) {
+    let pageTitle: string = window.location.hash.replace('#', '').replace('/', '').replace('?id=', ' ');
+    pageTitle = pageTitle.charAt(0).toUpperCase() + pageTitle.substring(1, pageTitle.length);
+    this.setPageHeaderState(pageHeaderConfig || { title: pageTitle.length > 0 ? pageTitle : 'Home' });
   }
 }

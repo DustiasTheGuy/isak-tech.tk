@@ -1,11 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HttpService } from '../../Services/http/http.service';
-import { iHttpResponse } from '../../Interfaces/http.interface';
-import { ActivatedRoute } from '@angular/router';
-import { iPost } from '../../Interfaces/post.interface';
-import { Title } from '@angular/platform-browser';
-import { StateService } from '../../Services/state/state.service';
+import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { HttpService } from 'src/app/Services/http/http.service';
+import { ActivatedRoute } from '@angular/router';
+import { StateService } from 'src/app/Services/state/state.service';
+import { InitialValues } from 'src/app/initial-values';
+import { iPost, iHttpResponse } from 'src/app/Interfaces/all.interfaces';
 
 @Component({
   selector: 'app-posts-index',
@@ -13,41 +12,30 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./posts-index.component.scss'],
   providers: [ DatePipe ]
 })
-export class PostsIndexComponent implements OnInit, OnDestroy {
+export class PostsIndexComponent implements OnInit {
   public data!: iPost[];
-  public pageTitle: string = 'Recent Posts';
+  public pageTitle?: string;
   public render: boolean = false;
-  public categories: string[] = [
-    "Articles",
-    "News",
-    "Product Reviews",
-    "Guides",
-    "Uncategorized",
-  ];
+  public categories: string[] = InitialValues.categoriesInitial;
 
   constructor(
     private datePipe: DatePipe,
     private stateService: StateService,
-    private titleService: Title,
     private activatedRoute: ActivatedRoute,
     private httpService: HttpService) {}
 
   ngOnInit(): void {
-    this.stateService.updatePageHeaderState(true);
     this.activatedRoute.queryParams.subscribe(params => 
     this.getPosts(params.category));
-  }
-
-  ngOnDestroy(): void {
-    this.stateService.updatePageHeaderState(false);
+    this.stateService.onPageLoad();
   }
 
   getPosts(category?: string) {
-    this.pageTitle = 
-    category != undefined && this.categories.includes(category) ? 
-    category : 'Recent Posts';
+    this.pageTitle = category != undefined && this.categories.includes(category) ? category : 'Recent Posts';
+    this.stateService.setPageHeaderState({ 
+      title: this.pageTitle
+    });
 
-    this.titleService.setTitle('Isak Tech - ' + this.pageTitle)
 
     this.httpService.getPosts()
     .subscribe((response: iHttpResponse) => 

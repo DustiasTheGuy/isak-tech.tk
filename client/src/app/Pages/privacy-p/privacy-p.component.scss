@@ -1,28 +1,49 @@
-section {
-    max-width: 100%;
-    overflow: hidden;
-    white-space: pre-wrap;
-    padding: 1.25em;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
-    h1 {
-        font-size: 40px;
-    }
+.container {
+    
+    nav {
+        margin-top: 1rem;
+        padding: 1rem 0;
+        display: flex;
+        flex-wrap: wrap;
 
-    h2, h3 {
-        color: rgb(100, 100, 100);
-    }
+        a {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            cursor: pointer;
+            color: #3737e9;
+            margin-bottom: 1rem;
 
-    ul {
-        li {
-            margin: 19px 0;
-
-            a {
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-                display: block;
-                margin: 10px 0;
+            &:not(:last-of-type) {
+                &::after {
+                    content: '-';
+                    margin: 0 1rem;
+                }
             }
         }
     }
+
+    .document {
+        margin: 0 0 0 auto;
+
+        section {
+            max-width: 100%;
+            overflow: hidden;
+            white-space: pre-wrap;
+            padding: 2rem;
+            transition: all 300ms linear;
+            border: 1px solid rgb(197, 197, 197);
+            margin: 1rem 0;
+
+            &:first-of-type {
+                margin-top: 0;
+            }
+
+            h1, h2, p, li {
+                font-family: 'Roboto', sans-serif !important;
+            }
+        }  
+    } 
 }

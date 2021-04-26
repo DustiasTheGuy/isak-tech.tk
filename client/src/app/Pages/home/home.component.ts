@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { data, IData }  from './data';
-import { StateService } from '../../Services/state/state.service';
+import { StateService } from 'src/app/Services/state/state.service';
+import { _image } from 'src/app/Interfaces/all.interfaces';
 
 @Component({
   selector: 'app-home',
@@ -9,38 +9,40 @@ import { StateService } from '../../Services/state/state.service';
 })
 
 export class HomeComponent implements OnInit {
-  public data: IData[];
   public themeColor: string = '';
+  public myTechnologies: _image[] = [
+    { src: '/assets/icons/nodejs.svg', alt: 'Nodejs Logo' },
+    { src: '/assets/icons/go.svg', alt: 'Golang Logo' },
+    { src: '/assets/icons/mongodb.svg', alt: 'MongoDB Logo' },
+    { src: '/assets/icons/mysql.svg', alt: 'MySQL Logo' },
+    { src: '/assets/icons/angular.svg', alt: 'Angular Logo' },
+    { src: '/assets/icons/vue.svg', alt: 'Vuejs Logo' }
+  ];
 
-  constructor(private stateService: StateService) {
-      this.data = data;
-      window.addEventListener('scroll', () => this.elementInView());
-  }
+  constructor(private stateService: StateService) {}
 
   ngOnInit() {
-    document.title = 'Isak Tech - Web Developer'
-    this.stateService.themeColorState()
-    .subscribe(newColor => this.themeColor = newColor);
-  }
-
-  elementInView() {
-    let elements = document.getElementsByClassName('section');
-    
-    for(let i = 0; i < elements.length; i++) {
-      let bounding  = elements[i].getBoundingClientRect();
-
-      let inView = 
-      bounding.top >= 0 && bounding.bottom <= 
-      (window.innerHeight + this.data[i].offset || document.documentElement.clientHeight + this.data[i].offset);
-
-      if (inView) {
-        elements[i].classList.add('animate')
+    this.stateService.onPageLoad({
+      title: 'Isak Granqvist',
+      subtitle: 'According to the SBA, only 64% of small businesses have a website. Are you one of those? Then you should hire me!',
+      button: {
+        show: true,
+        text: 'hire me',
+        href: '/services'
+      },
+      image: { 
+        src: '/assets/images/page_headers/pexels-andy-vu-3244513.png', 
+        alt: 'Snowy Image' 
+      },
+      theme: { 
+        text_color: '#fff' 
+      },
+      layout: {
+        height: '100vh',
+        bottom_border: 'none'
       }
-    }
-  }
-
-  isMobile(): boolean {
-    console.log(window.innerWidth >= 768)
-    return false;
+    });
+    this.stateService.getThemeColorState()
+    .subscribe(newColor => this.themeColor = newColor);
   }
 }

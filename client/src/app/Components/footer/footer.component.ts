@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { StateService } from '../../Services/state/state.service';
+import { StateService } from 'src/app/Services/state/state.service';
 
 @Component({
   selector: 'app-footer',
@@ -12,7 +12,7 @@ export class FooterComponent implements OnInit {
   constructor(private stateService: StateService) { }
 
   ngOnInit(): void {
-    this.stateService.themeColorState()
+    this.stateService.getThemeColorState()
     .subscribe(newColor => this.themeColor = newColor);
   }
 }

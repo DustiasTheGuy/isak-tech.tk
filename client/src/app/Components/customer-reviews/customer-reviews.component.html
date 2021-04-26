@@ -1,0 +1,22 @@
+<section id="container">
+    <div class="carousel">
+        <div class="slide" *ngFor="let review of reviews; let i = index" [ngClass]="{ 'negative': i < cData.active, 'active': i === cData.active, 'positive': i > cData.active }" [style.marginLeft]="calcMarginLeft(i)">
+            <img [src]="review.img.src" [alt]="review.img.alt">
+            <h3>{{ review.title }}</h3>
+            <p>{{ review.description }}</p>
+        </div>
+        <div class="controls" *ngIf="carouselOptions.controls">
+            <button [disabled]="cData.active <= 0" (click)="cData.active = cData.active > 0 ? cData.active - 1 : cData.active">
+                <i class="fas fa-chevron-left"></i>
+            </button>    
+            <button [disabled]="cData.active >= reviews.length - 1" (click)="cData.active = cData.active < reviews.length - 1 ? cData.active + 1 : cData.active">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="dots" *ngIf="carouselOptions.dots">
+        <button *ngFor="let dot of reviews; let i = index" (click)="cData.active = i" [ngClass]="{ 'active': i === cData.active }"></button>
+    </div>
+</section>
+

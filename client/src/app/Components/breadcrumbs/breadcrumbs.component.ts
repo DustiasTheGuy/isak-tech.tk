@@ -12,12 +12,4 @@ export class BreadcrumbsComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }
-
-/*
-  [
-    { text: '', link: '', query: {} }
-  ]
-
-*/

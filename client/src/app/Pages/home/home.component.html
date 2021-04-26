@@ -1,26 +1,17 @@
-<div class="container">
-    <div class="content">
-        <div *ngFor="let section of data; let i = index" class="section" [class]="section.animation" [ngStyle]="{ 'flex-direction': section.layout }">
-            <div class="images-container">
-                <img *ngFor="let img of section.images" [src]="img" alt="Image">
-            </div>
-            <div class="text-container" *ngIf="section.title != undefined || section.body != undefined">
-                <h3>{{ section.title }}</h3>
-                
-                <p *ngFor="let p of section.body">{{ p }}</p>
+<div class="wrapper">
+    <section class="container">
+        <h2>I Build With</h2>
+        <div class="technologies-grid">
+            <img *ngFor="let img of myTechnologies" [src]="img.src" alt="">
+        </div> 
+    </section>
 
-                <a 
-                *ngFor="let link of section.links"
-                [href]="link.href"
-                
-                [style.--bgcolor]="themeColor"
-                [ngStyle]="{ 
-                    'border-color': themeColor,
-                    'color': themeColor
-                }">
-                    {{ link.text }}
-                </a>
-            </div>
-        </div>
-    </div>
+
+    <div class="hr"></div>
+
+    <section class="container">
+        <h2>Testimonials</h2>
+        <app-customer-reviews></app-customer-reviews>
+    </section>
 </div>
+

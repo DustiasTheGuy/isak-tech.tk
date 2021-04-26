@@ -1,4 +1,4 @@
-<section *ngIf="render">
+<section class="container" *ngIf="render">
     <app-breadcrumbs [links]="[
     { text: 'Posts', link: '/posts' },
     { text: pageTitle, link: '/posts', query: { category: pageTitle } }
@@ -14,6 +14,6 @@
     </div>
 </section>
 
-<section *ngIf="!render">
+<section class="container" *ngIf="!render">
     <h1>Loading Posts...</h1>
 </section>

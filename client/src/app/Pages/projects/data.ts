@@ -1,12 +1,6 @@
-export interface IProject {
-    title: string;
-    description: string;
-    repo: string;
-    selectedImg: number;
-    images: string[];
-}
+import { iProject } from 'src/app/Interfaces/all.interfaces';
 
-export const data: IProject[] = [
+export const data: iProject[] = [
     { 
       title: 'vpnfind.site', 
       description: "This project was an effort at understanding the affiliate marketing space. I discovered the affiliate marketing space through social media and decided to see what's going on there so wanted to create a project related to it.", 

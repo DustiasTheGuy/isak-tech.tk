@@ -1,4 +1,4 @@
-<section>
+<section class="container">
 
     <form>
         <div class="row">
@@ -25,9 +25,7 @@
             <label for="message">Message</label>
             <textarea name="message" id="message" [(ngModel)]="formFields.message" placeholder="" tabindex="4"></textarea>
         </div>
-
-        <p *ngIf="messages.show" [ngStyle]="{ 'color': messages.error ? 'red' : 'green' }">{{messages.message}}</p>
-
+        
         <div class="button-group">
             <button [disabled]="btnDisabled" (click)="validateForm()" [style.backgroundColor]="themeColor">
                 <span>Send</span>

@@ -1,8 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { StateService } from '../../Services/state/state.service';
-import { products, iProduct } from './products';
-import { HttpService } from '../../Services/http/http.service';
-import { ValidationService } from '../../Services/validation/validation.service';
+import { Component, OnInit } from '@angular/core';
+import { StateService } from 'src/app/Services/state/state.service';
+import { HttpService } from 'src/app/Services/http/http.service';
+import { ValidationService } from 'src/app/Services/validation/validation.service';
+import { iProduct } from 'src/app/Interfaces/all.interfaces';
+import { products } from './products';
 
 @Component({
   selector: 'app-services',
@@ -10,19 +11,12 @@ import { ValidationService } from '../../Services/validation/validation.service'
   styleUrls: ['./services.component.scss']
 })
 
-export class ServicesComponent implements OnInit, OnDestroy {
+export class ServicesComponent implements OnInit {
   public themeColor: string = '';
-  public products: iProduct[];
-  public modalOpen = false;
   public email: string = '';
-  public alert: any = {
-    show: false,
-    message: '',
-    color: ''
-  };
-  public modalData: any = {
-    product: undefined
-  };
+  public products: iProduct[];
+  public modalOpen: boolean = false;
+  public modalData: any = { product: undefined };
 
   constructor(
     private validationService: ValidationService,
@@ -32,43 +26,31 @@ export class ServicesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {    
-    this.stateService.themeColorState()
+    this.stateService.getThemeColorState()
     .subscribe(newColor => this.themeColor = newColor);
-
-    document.title = 'Isak Tech - Services';
-    this.stateService.updatePageHeaderState(true);
+    this.stateService.onPageLoad();
   }
 
-  ngOnDestroy(): void {
-    this.stateService.updatePageHeaderState(false);
-  }
-
-  openModal(product: iProduct) {
+  openModal(product: iProduct): void {
     this.modalData.product = product;
     this.modalOpen = true;
   }
 
-  closeModal(e: Event) {
+  closeModal(e: Event): void {
     this.modalOpen = false;
     e.stopPropagation();
   }
  
-  submit() {
-    this.alert = { show: false, color: '', message: '' }
+  submit(): void {
 
     if(!this.validationService.emailValidation(this.email)) {
-      this.alert = { show: true, class: 'error', message: `You've entered an invalid email` }
-
+      this.stateService.setAlertSubject({ type: 'error', message: 'You\'ve entered an invalid email' });
+      
     } else {
       this.httpService.placeOrder({ email: this.email })
       .subscribe(response => response.success 
-      ? this.alert = { show: true, class: 'success', message: 'Your order has been placed, I will get back to you shortly.'}
-      : this.alert = { show: true, class: 'error', message: 'An internal server error has occured, please try again'});
+      ? this.stateService.setAlertSubject({ type: 'success', message: 'Your order has been placed, I will get back to you shortly.' })
+      : this.stateService.setAlertSubject({ type: 'error', message: 'An internal server error has occured, please try again' }));
     }
-
-    setTimeout(() => {
-      this.alert.show = false;
-      this.email = '';
-    }, 5000);
   }
 }

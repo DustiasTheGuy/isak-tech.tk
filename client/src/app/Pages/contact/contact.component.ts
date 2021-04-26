@@ -1,11 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { iFormFields } from '../../Interfaces/form-fields.interface';
-import { HttpService } from '../../Services/http/http.service';
-import { iHttpResponse } from '../../Interfaces/http.interface';
-import { Title } from '@angular/platform-browser';
-import { StateService } from '../../Services/state/state.service';
-import { ValidationService } from '../../Services/validation/validation.service';
+import { iFormFields } from 'src/app/Interfaces/form-fields.interface';
+import { HttpService } from 'src/app/Services/http/http.service';
+import { iHttpResponse } from 'src/app/Interfaces/http.interface';
+import { StateService } from 'src/app/Services/state/state.service';
+import { ValidationService } from 'src/app/Services/validation/validation.service';
+import { InitialValues } from 'src/app/initial-values';
 
 @Component({
   selector: 'app-contact',
@@ -13,9 +13,8 @@ import { ValidationService } from '../../Services/validation/validation.service'
   styleUrls: ['./contact.component.scss']
 })
 
-export class ContactComponent implements OnInit, OnDestroy {
-  public formFields: iFormFields = { inquiry: '', fullName: '', email: '', message: '' }
-  public messages: any = { message: 'Example Message', show: false, error: false }
+export class ContactComponent implements OnInit {
+  public formFields: iFormFields = InitialValues.contactFormInitial;
   public btnDisabled: boolean = false;
   public themeColor: string = '';
 
@@ -23,25 +22,21 @@ export class ContactComponent implements OnInit, OnDestroy {
     private router: Router,
     private stateService: StateService,
     private validationService: ValidationService,
-    private titleService: Title,
     private httpService: HttpService,
     private activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.titleService.setTitle('Isak Tech - Contact')
-    this.stateService.updatePageHeaderState(true);
+    this.stateService.onPageLoad();
+    
     this.activatedRoute.queryParams.subscribe(params => 
     this.formFields.inquiry = this.formSetup(params.card))
     document.getElementById('fullName')?.focus();
-    this.stateService.themeColorState()
+    this.stateService.getThemeColorState()
     .subscribe(newColor => this.themeColor = newColor);
   }
 
-  ngOnDestroy(): void {
-    this.stateService.updatePageHeaderState(false);
-  }
 
-  formSetup(card?: string): string {
+  private formSetup(card?: string): string {
     switch(card) {
       case '1': return 'General Programming & Development';
       case '2': return 'Website Development & Design';
@@ -50,22 +45,22 @@ export class ContactComponent implements OnInit, OnDestroy {
     }
   }
 
-  validateForm(): any {    
+  public validateForm(): any {    
 
     if(!this.validationService.emailValidation(this.formFields.email.toLowerCase())) {
       document.getElementById('email')?.focus();
-      return this.messages = { message: 'Invalid Email', show: true, error: true }
+      return this.stateService.setAlertSubject({ type: 'warning', message: 'Invalid Email' });
       
     } else if(!this.validationService.strNotEmpty(this.validationService.upperCaseFirstLetter(this.formFields.fullName))) {
       document.getElementById('fullName')?.focus();
-      return this.messages = { message: 'Missing Field - Full Name', show: true, error: true }
+      return this.stateService.setAlertSubject({ type: 'error', message: 'Missing Field - Full Name' });
 
     } else if(!this.validationService.strNotEmpty(this.formFields.message)) {
       document.getElementById('message')?.focus();
-      return this.messages = { message: 'Missing Field - Message', show: true, error: true }
+      return this.stateService.setAlertSubject({ type: 'error', message: 'Missing Field - Message' });
 
     } else if(this.formFields.message.length <= 25) {
-      return this.messages = { message: 'Message too short. Minimum 25 characters', show: true, error: true }
+      return this.stateService.setAlertSubject({ type: 'error', message: 'Message too short. Minimum 25 characters' });
 
     } else {
       return this.contact()
@@ -73,17 +68,15 @@ export class ContactComponent implements OnInit, OnDestroy {
   }
 
 
-  contact(): void { // send form data to server
+  private contact(): void { // send form data to server
     this.btnDisabled = true;
     this.formFields.fullName = this.validationService.upperCaseFirstLetter(this.formFields.fullName.toLowerCase());
     this.formFields.email = this.formFields.email.toLowerCase();
 
     this.httpService.contact(this.formFields)
     .subscribe((response: iHttpResponse) => {
-        this.messages = !response.success 
-        ? this.messages = { message: response.message, show: true, error: true }
-        : this.messages = { message: response.message, show: true, error: false }
-  
+        this.stateService.setAlertSubject({ type: response.success ? 'success' : 'error', message: response.message });
+
         if(response.success) {
           setTimeout(() => this.router.navigate(["/news-letter"], { 
             queryParams: { 

@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=Merriweather:wght@400;700&family=Open+Sans&family=Roboto:wght@400;500;700;900&display=swap');
+@import '~ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
+@import '~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
 
 $color1: #ffffff; // main background color
 $color2: #353535; // text and large containers
@@ -73,15 +75,6 @@ h1, h2, h3, h4, h5, h6, p, span, label, button {
     color: $color2; 
 }
 
-/*
-    font-family: 'Anton', sans-serif;
-    font-family: 'Archivo Black', sans-serif;
-    font-family: 'Merriweather', serif;
-    font-family: 'Open Sans', sans-serif;
-    font-family: 'Roboto', sans-serif;
-*/
-
-
 .invert { color: #ffffff; }
 .contrast { 
     color: #fff; 
@@ -94,7 +87,7 @@ h1, h2, h3, h4, h5, h6, p, span, label, button {
 .bg-third { background-color: $color3; }
 
 
-button.slide {
+button.slide, a.slide {
     position: relative;
     cursor: pointer;
     
@@ -146,4 +139,33 @@ button.slide {
             width: 100%;                    
         }  
     } 
+}
+
+
+.container {
+    margin: 0 auto;
+}
+
+@media only screen and(min-width: 1600px) {
+    .container {
+        width: 1200px;
+    }
+}
+
+@media only screen and(max-width: 1600px) and(min-width: 999px) {
+    .container {
+        width: 70%;
+    } 
+}
+
+@media only screen and(max-width: 999px) and(min-width: 768px) {
+    .container {
+        width: 80%;
+    }
+}
+
+@media only screen and(max-width:768px) {
+    .container {
+        width: 90%;
+    }
 }

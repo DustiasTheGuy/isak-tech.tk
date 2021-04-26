@@ -1,14 +1,6 @@
-export interface IData {
-    title?: string;
-    body?: string[];
-    images?: string[];
-    links?: any[];
-    animation: string;
-    offset: number;
-    layout: string;
-}
+import { iData } from 'src/app/Interfaces/all.interfaces';
 
-export const data: IData[] = [
+export const data: iData[] = [
     {
         title: 'Missed Opportunities',
         body: [ 

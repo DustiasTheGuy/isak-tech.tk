@@ -1,4 +1,4 @@
-<section *ngIf="data">
+<section class="container" *ngIf="data">
     <app-breadcrumbs [links]="[
     { text: 'Posts', link: '/posts' },
     { text: data.category, link: '/posts', query: { category: data.category } },

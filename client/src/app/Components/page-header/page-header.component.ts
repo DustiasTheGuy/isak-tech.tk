@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
-import { StateService } from '../../Services/state/state.service';
+import { StateService } from 'src/app/Services/state/state.service';
+import { iPageHeaderConfig } from 'src/app/Interfaces/header-config.interface';
 
 @Component({
   selector: 'app-page-header',
@@ -9,9 +9,9 @@ import { StateService } from '../../Services/state/state.service';
 })
 
 export class PageHeaderComponent implements OnInit {
+  public titleParts: string[] = [];
   public showContent: boolean = false;
-  public pageHeaderState: boolean = false;
-  public pageTitle?: string;
+  public pageHeaderState: iPageHeaderConfig = { title: 'Page Title' };
   public fillColor: string = '#205dce';
   public colorPickerOpen: boolean = false;
   public colors: string[] = [ 
@@ -21,58 +21,49 @@ export class PageHeaderComponent implements OnInit {
     '#32a852'
   ];
 
-  constructor(private router: Router, private stateService: StateService) {
-    this.setPageData();
-    this.router.events.subscribe((e: any) => {
-      this.toggleContent();
-
-      if(e instanceof NavigationEnd)
-      this.setPageData();
-    });
-  }
+  constructor(private stateService: StateService) {}
 
   ngOnInit(): void {
-    this.stateService.pageHeaderState()
-    .subscribe(newState => this.pageHeaderState = newState);
-    this.stateService.updateThemeColorState(this.fillColor);
+    this.stateService.getPageHeaderState()
+    .subscribe(newState => {
+        this.pageHeaderState = newState;
+        document.title = `Isak Granqvist - ${this.pageHeaderState.title}`;
 
+        this.titleParts = this.pageHeaderState.title?.split('') || [];
+    });
+
+    this.stateService.setThemeColorState(this.fillColor);
     let color = localStorage.getItem('color');
-    
     if(color != null) {
       this.fillColor = color;
     } 
-    
-    setTimeout(() => 
-    this.emitColor(this.fillColor), 0)  
+
+    setTimeout(() => this.emitColor(this.fillColor), 0);
   }
 
-  toggleContent(): void {
-    this.showContent = false;
-
-    setTimeout(() => {
-      this.showContent = true;
-    }, 200)
-  } 
-
-  setPageData(): void {
-    this.pageTitle = window.location.hash.replace('/', '').replace('#', '').replace('-', '').replace('?id=', ' ');
-  }
-
-  scrollDown(): void {
-    document.getElementById('main')?.scrollIntoView({ 
-      block: 'start'
-    });
-
-    window.scrollBy(0, - 56); // 0 - navbar height
-  }
-
-  bgImageSetup() {
+  bgImageSetup(): string {
     return `url(${ !this.pageHeaderState ? '/assets/full_size.svg' : '/assets/half_size.svg' })`;
   }
 
-  emitColor(color: string) {
+  emitColor(color: string): void {
     this.fillColor = color;
-    this.stateService.updateThemeColorState(color);
+    this.stateService.setThemeColorState(color);
     localStorage.setItem('color', color);
+  }
+  
+  getThemeColor() {
+    if(this.pageHeaderState.theme != undefined) {
+      return this.pageHeaderState.theme.text_color;
+    };
+
+    return '#333';
+  }
+
+  setupTheme() {
+    return {
+      'color': this.fillColor,
+      'height': this.pageHeaderState.layout?.height,
+      'border-bottom': this.pageHeaderState.layout?.bottom_border
+    }
   }
 }

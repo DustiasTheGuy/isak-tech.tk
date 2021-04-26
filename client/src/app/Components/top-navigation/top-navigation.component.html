@@ -1,7 +1,7 @@
-<div class="bars" [ngClass]="{ 'open': menuIsOpen }" (click)="openMenu()">
-    <span [style.backgroundColor]="hamburgerColor"></span>
-    <span [style.backgroundColor]="hamburgerColor"></span>
-    <span [style.backgroundColor]="hamburgerColor"></span>
+<div class="bars" [ngClass]="{ 'open': menuIsOpen }" (click)="openMenu()" [style.fill]="themeColor">
+    <span [style.backgroundColor]="themeColor"></span>
+    <span [style.backgroundColor]="themeColor"></span>
+    <span [style.backgroundColor]="themeColor"></span>
 </div>
 
 <div class="filler" [ngClass]="{ 'open': menuIsOpen }" (click)="openMenu()"></div>

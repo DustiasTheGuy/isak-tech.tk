@@ -1,8 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { StateService } from '../../Services/state/state.service';
+import { Component, OnInit } from '@angular/core';
+import { StateService } from 'src/app/Services/state/state.service';
 import { ActivatedRoute } from '@angular/router';
-import { ValidationService } from '../../Services/validation/validation.service';
-import { HttpService } from '../../Services/http/http.service';
+import { ValidationService } from 'src/app/Services/validation/validation.service';
+import { HttpService } from 'src/app/Services/http/http.service';
+import { InitialValues } from 'src/app/initial-values';
 
 @Component({
   selector: 'app-newsletter-signup',
@@ -10,18 +11,10 @@ import { HttpService } from '../../Services/http/http.service';
   styleUrls: ['./newsletter-signup.component.scss']
 })
 
-export class NewsletterSignupComponent implements OnInit, OnDestroy {
+export class NewsletterSignupComponent implements OnInit {
   public email: string;
   public themeColor: string = '';
-  public formConfig = {
-    email: '',
-    fullName: ''
-  };
-  public alert: any = {
-    show: false,
-    message: '',
-    color: ''
-  };
+  public formConfig = InitialValues.newsLetterInitial;
 
   constructor(
     private validationService: ValidationService,
@@ -32,35 +25,34 @@ export class NewsletterSignupComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.stateService.onPageLoad({
+      title: 'News Letter',
+      image: {
+        src: '/assets/images/page_headers/razvan-dumitrasconiu-Dd079V8Letk-unsplash.png',
+        alt: 'A few envelopes'
+      },
+      theme: {
+        text_color: '#fff'
+      }
+    });
+
     this.activatedRoute.queryParams.subscribe(params => {
       this.formConfig.email = params.e || '';
       this.formConfig.fullName = params.n || '';
     });
-    
-    document.title = 'Isak Tech - News Letter';
-    this.stateService.updatePageHeaderState(true);
-    this.stateService.themeColorState()
-    .subscribe(newColor => this.themeColor = newColor);
-  }
 
-  ngOnDestroy(): void {
-    this.stateService.updatePageHeaderState(false);
+    this.stateService.getThemeColorState()
+    .subscribe(newColor => this.themeColor = newColor);
   }
 
   submit(): void {
     if(!this.validationService.emailValidation(this.formConfig.email)) {
-      this.alert = { show: true, class: 'error', message: `You've entered an invalid email` };
-
+      this.stateService.setAlertSubject({ type: 'error', message: 'Email Validation Failed' });
     } else {
       this.httpService.placeOrder({ email: this.formConfig.email })
-      .subscribe(response => response.success
-      ? this.alert = { show: true, class: 'success', message: `You have joined the mailing list, thank you!` }
-      : this.alert = { show: true, class: 'error', message: `An internal server error has occured` });
+      .subscribe(response => {
+          this.stateService.setAlertSubject({ type: response.success ? 'success' : 'error', message: response.message });
+      })
     }
-
-    setTimeout(() => {
-      this.alert.show = false;
-      this.formConfig.email = '';
-    }, 5000);
   }
 }
