@@ -14,35 +14,37 @@ export class PageHeaderComponent implements OnInit {
   public pageHeaderState: iPageHeaderConfig = { title: 'Page Title' };
   public fillColor: string = '#205dce';
   public colorPickerOpen: boolean = false;
-  public colors: string[] = [ 
-    '#205dce', 
-    '#3b3b3b', 
+  public colors: string[] = [
+    '#205dce',
+    '#3b3b3b',
     '#eb4034',
     '#32a852'
   ];
 
-  constructor(private stateService: StateService) {}
+  constructor(private stateService: StateService) { }
 
   ngOnInit(): void {
     this.stateService.getPageHeaderState()
-    .subscribe(newState => {
+      .subscribe(newState => {
         this.pageHeaderState = newState;
+        this.pageHeaderState.title = this.pageHeaderState.title?.replace('Posts?category=', '')
+
         document.title = `Isak Granqvist - ${this.pageHeaderState.title}`;
 
         this.titleParts = this.pageHeaderState.title?.split('') || [];
-    });
+      });
 
     this.stateService.setThemeColorState(this.fillColor);
     let color = localStorage.getItem('color');
-    if(color != null) {
+    if (color != null) {
       this.fillColor = color;
-    } 
+    }
 
     setTimeout(() => this.emitColor(this.fillColor), 0);
   }
 
   bgImageSetup(): string {
-    return `url(${ !this.pageHeaderState ? '/assets/full_size.svg' : '/assets/half_size.svg' })`;
+    return `url(${!this.pageHeaderState ? '/assets/full_size.svg' : '/assets/half_size.svg'})`;
   }
 
   emitColor(color: string): void {
@@ -50,9 +52,9 @@ export class PageHeaderComponent implements OnInit {
     this.stateService.setThemeColorState(color);
     localStorage.setItem('color', color);
   }
-  
+
   getThemeColor() {
-    if(this.pageHeaderState.theme != undefined) {
+    if (this.pageHeaderState.theme != undefined) {
       return this.pageHeaderState.theme.text_color;
     };
 
